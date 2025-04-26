@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register for a RamzBank online banking account.">
+    <title>Register | RamzBank - Online Banking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        dark: {
+                            DEFAULT: '#000000',
+                            secondary: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .register-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/banners/register-banner.jpg');
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            background-color: '#2563eb';
+        }
+        
+        .dark .register-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/banners/register-banner.jpg');
+        }
+        
+        .register-card {
+            transition: all 0.3s ease;
+            background: white;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .dark .register-card {
+            background: #1f2937;
+        }
+        
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            width: 50px;
+            height: 50px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-to-top:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .back-to-top {
+            background: #1e40af;
+        }
+        
+        .dark .back-to-top:hover {
+            background: #2563eb;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+        
+        .pulse-animation { animation: pulse 2s infinite; }
+        
+        .progress-steps {
+            counter-reset: step;
+        }
+        
+        .progress-step {
+            position: relative;
+            counter-increment: step;
+        }
+        
+        .progress-step:before {
+            content: counter(step);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #e5e7eb;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .progress-step.active:before {
+            background-color: #2563eb;
+            color: white;
+        }
+        
+        .progress-step.completed:before {
+            background-color: #10b981;
+            color: white;
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+        
+        .dark .progress-step:before {
+            background-color: #374151;
+            color: #e5e7eb;
+        }
+        
+        .password-strength {
+            height: 5px;
+            background-color: #e5e7eb;
+            border-radius: 2.5px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .password-requirements {
+            margin-top: 8px;
+            font-size: 0.875rem;
+        }
+        
+        .password-requirement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            color: #6b7280;
+        }
+        
+        .password-requirement.valid {
+            color: #10b981;
+        }
+        
+        .password-requirement i {
+            margin-right: 6px;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-black dark:text-gray-200 transition-colors duration-300">
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary dark:text-white">Ramz<span class="text-blue-600 dark:text-blue-400">Bank</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Home</a>
+                    <a href="accounts.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Accounts</a>
+                    <a href="loans.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Loans</a>
+                    <a href="investments.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Investments</a>
+                    <a href="about.html" class="font-medium hover:text-primary dark:hover:text-blue-400">About Us</a>
+                    <a href="contact.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-icon" class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                    <a href="login.html" class="hidden md:block bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-colors">
+                        Online Banking Login
+                    </a>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-bars text-gray-700 dark:text-gray-200"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="index.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Home</a>
+                <a href="accounts.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Accounts</a>
+                <a href="loans.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Loans</a>
+                <a href="investments.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Investments</a>
+                <a href="about.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">About Us</a>
+                <a href="contact.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Contact</a>
+                <a href="login.html" class="block mt-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium text-center transition-colors">
+                    Online Banking Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 dark:bg-gray-800 py-4">
+        <div class="container mx-auto px-4">
+            <nav aria-label="breadcrumb">
+                <ol class="flex space-x-2 text-sm">
+                    <li><a href="index.html" class="text-primary hover:underline">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-gray-500"></i></li>
+                    <li><a href="register.html" class="text-primary hover:underline">Register</a></li>
+                    <li><i class="fas fa-chevron-right text-gray-500"></i></li>
+                    <li class="text-gray-600 dark:text-gray-400" aria-current="page">Account Setup</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="register-hero relative flex items-center justify-center">
+        <div class="text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Set Up Your Online Banking</h1>
+            <p class="text-xl text-gray-200 max-w-2xl mx-auto">Create your username and secure password</p>
+        </div>
+    </div>
+
+    <!-- Registration Form Section -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <!-- Progress Steps -->
+                <div class="mb-8">
+                    <div class="flex progress-steps justify-between mb-4">
+                        <div class="progress-step completed flex items-center">
+                            <span class="hidden sm:inline">Personal Information</span>
+                        </div>
+                        <div class="progress-step active flex items-center">
+                            <span class="hidden sm:inline">Account Setup</span>
+                        </div>
+                        <div class="progress-step flex items-center">
+                            <span class="hidden sm:inline">Verification</span>
+                        </div>
+                        <div class="progress-step flex items-center">
+                            <span class="hidden sm:inline">Confirmation</span>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="bg-primary h-2.5 rounded-full" style="width: 50%"></div>
+                    </div>
+                </div>
+                
+                <!-- Registration Card -->
+                <div class="register-card p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-6">Step 2: Account Setup</h2>
+                    <form id="account-setup-form" class="space-y-6">
+                        <div>
+                            <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Username <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                                    placeholder="Choose your username"
+                                    required
+                                >
+                                <div id="username-availability" class="absolute right-3 top-2.5 text-sm hidden">
+                                    <span class="flex items-center">
+                                        <i class="fas fa-check-circle text-green-500 mr-1"></i>
+                                        <span class="text-green-500">Available</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Must be 6-20 characters, letters and numbers only</p>
+                        </div>
+                        
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Password <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                                    placeholder="Create a strong password"
+                                    required
+                                >
+                                <button type="button" id="toggle-password" class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength">
+                                <div id="password-strength-bar" class="password-strength-bar"></div>
+                            </div>
+                            <div class="password-requirements">
+                                <div id="length-req" class="password-requirement">
+                                    <i class="fas fa-circle"></i>
+                                    <span>At least 8 characters</span>
+                                </div>
+                                <div id="uppercase-req" class="password-requirement">
+                                    <i class="fas fa-circle"></i>
+                                    <span>At least 1 uppercase letter</span>
+                                </div>
+                                <div id="lowercase-req" class="password-requirement">
+                                    <i class="fas fa-circle"></i>
+                                    <span>At least 1 lowercase letter</span>
+                                </div>
+                                <div id="number-req" class="password-requirement">
+                                    <i class="fas fa-circle"></i>
+                                    <span>At least 1 number</span>
+                                </div>
+                                <div id="special-req" class="password-requirement">
+                                    <i class="fas fa-circle"></i>
+                                    <span>At least 1 special character</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="confirm-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Confirm Password <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                name="confirm-password"
+                                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                                placeholder="Re-enter your password"
+                                required
+                            >
+                            <div id="password-match" class="mt-1 text-sm hidden">
+                                <span class="text-green-500"><i class="fas fa-check-circle mr-1"></i> Passwords match</span>
+                            </div>
+                            <div id="password-mismatch" class="mt-1 text-sm hidden">
+                                <span class="text-red-500"><i class="fas fa-times-circle mr-1"></i> Passwords don't match</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="security-question" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Security Question <span class="text-red-500">*</span>
+                                </label>
+                                <select
+                                    id="security-question"
+                                    name="security-question"
+                                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                                    required
+                                >
+                                    <option value="">Select a security question</option>
+                                    <option value="What was your first pet's name?">What was your first pet's name?</option>
+                                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                                    <option value="What was the name of your first school?">What was the name of your first school?</option>
+                                    <option value="What city were you born in?">What city were you born in?</option>
+                                    <option value="What is your favorite book?">What is your favorite book?</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="security-answer" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Security Answer <span class="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    id="security-answer"
+                                    name="security-answer"
+                                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                                    placeholder="Enter your answer"
+                                    required
+                                >
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input
+                                    id="terms"
+                                    name="terms"
+                                    type="checkbox"
+                                    class="focus:ring-primary h-4 w-4 text-primary border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"
+                                    required
+                                >
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="terms" class="font-medium text-gray-700 dark:text-gray-300">
+                                    I agree to the <a href="terms.html" class="text-primary hover:underline">Terms of Service</a> and <a href="privacy-policy.html" class="text-primary hover:underline">Privacy Policy</a>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 flex justify-between">
+                            <a href="register.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-md font-medium transition-colors dark:bg-gray-700 dark:hover:bg-gray-600">
+                                Back
+                            </a>
+                            <button
+                                type="submit"
+                                id="continue-button"
+                                class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-md font-medium transition-colors pulse-animation disabled:opacity-50 disabled:cursor-not-allowed"
+                                disabled
+                            >
+                                Continue to Step 3
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            Already have an account? <a href="login.html" class="text-primary hover:underline">Log in here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Assurance Section -->
+    <section class="py-12 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">Your Security Is Our Priority</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-lock text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">256-bit Encryption</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Bank-level security protects your personal and financial information
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Fraud Protection</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        24/7 monitoring to detect and prevent suspicious activity
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-shield text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Privacy Guaranteed</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        We never share your information with third parties
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">RamzBank</h3>
+                    <p class="mb-4">Innovative banking solutions for the digital age.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accounts.html" class="hover:text-white">Personal Banking</a></li>
+                        <li><a href="accounts.html" class="hover:text-white">Business Banking</a></li>
+                        <li><a href="loans.html" class="hover:text-white">Loans</a></li>
+                        <li><a href="investments.html" class="hover:text-white">Investments</a></li>
+                        <li><a href="credit-cards.html" class="hover:text-white">Credit Cards</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="careers.html" class="hover:text-white">Careers</a></li>
+                        <li><a href="newsroom.html" class="hover:text-white">Newsroom</a></li>
+                        <li><a href="investor-relations.html" class="hover:text-white">Investor Relations</a></li>
+                        <li><a href="corporate-responsibility.html" class="hover:text-white">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="faqs.html" class="hover:text-white">FAQs</a></li>
+                        <li><a href="security-center.html" class="hover:text-white">Security Center</a></li>
+                        <li><a href="branch-locator.html" class="hover:text-white">Branch Locator</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-sm">
+                <p id="footer-copyright">© 2025 RamzBank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+        themeToggle.addEventListener('click', function() {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                }
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Animate Registration Card on Load
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerCard = document.querySelector('.register-card');
+            registerCard.style.animation = 'fadeInUp 0.5s ease-out forwards';
+            
+            // Initialize form validation
+            initFormValidation();
+        });
+
+        // Form Validation
+        function initFormValidation() {
+            const form = document.getElementById('account-setup-form');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+            const continueButton = document.getElementById('continue-button');
+            
+            // Username validation
+            const usernameInput = document.getElementById('username');
+            const usernameAvailability = document.getElementById('username-availability');
+            
+            usernameInput.addEventListener('input', function() {
+                const username = this.value;
+                const isValid = username.length >= 6 && username.length <= 20 && /^[a-zA-Z0-9]+$/.test(username);
+                
+                if (isValid) {
+                    // Simulate username availability check
+                    setTimeout(() => {
+                        usernameAvailability.classList.remove('hidden');
+                        checkFormValidity();
+                    }, 500);
+                } else {
+                    usernameAvailability.classList.add('hidden');
+                }
+                checkFormValidity();
+            });
+            
+            // Toggle password visibility
+            const togglePassword = document.getElementById('toggle-password');
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                confirmPasswordInput.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+            
+            // Password strength checker
+            passwordInput.addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+                checkPasswordMatch();
+                checkFormValidity();
+            });
+            
+            // Confirm password checker
+            confirmPasswordInput.addEventListener('input', function() {
+                checkPasswordMatch();
+                checkFormValidity();
+            });
+            
+            // Security question and answer validation
+            const securityQuestion = document.getElementById('security-question');
+            const securityAnswer = document.getElementById('security-answer');
+            
+            securityQuestion.addEventListener('change', checkFormValidity);
+            securityAnswer.addEventListener('input', checkFormValidity);
+            
+            // Terms checkbox validation
+            const termsCheckbox = document.getElementById('terms');
+            termsCheckbox.addEventListener('change', checkFormValidity);
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (continueButton.disabled) return;
+                
+                // In a real app, you would submit the form data to the server
+                // For this demo, we'll just proceed to the next step
+                window.location.href = 'register-step3.html';
+            });
+        }
+        
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('password-strength-bar');
+            const lengthReq = document.getElementById('length-req');
+            const uppercaseReq = document.getElementById('uppercase-req');
+            const lowercaseReq = document.getElementById('lowercase-req');
+            const numberReq = document.getElementById('number-req');
+            const specialReq = document.getElementById('special-req');
+            
+            // Reset all requirements
+            lengthReq.classList.remove('valid');
+            uppercaseReq.classList.remove('valid');
+            lowercaseReq.classList.remove('valid');
+            numberReq.classList.remove('valid');
+            specialReq.classList.remove('valid');
+            
+            // Check requirements
+            const hasLength = password.length >= 8;
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasLowercase = /[a-z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[^A-Za-z0-9]/.test(password);
+            
+            // Update requirement indicators
+            if (hasLength) lengthReq.classList.add('valid');
+            if (hasUppercase) uppercaseReq.classList.add('valid');
+            if (hasLowercase) lowercaseReq.classList.add('valid');
+            if (hasNumber) numberReq.classList.add('valid');
+            if (hasSpecial) specialReq.classList.add('valid');
+            
+            // Calculate strength score - gives 100% only when all requirements are met
+            let strength = 0;
+            const requirements = [hasLength, hasUppercase, hasLowercase, hasNumber, hasSpecial];
+            const metRequirements = requirements.filter(Boolean).length;
+            strength = (metRequirements / requirements.length) * 100;
+            
+            // Update strength bar
+            strengthBar.style.width = strength + '%';
+            
+            // Update strength bar color
+            if (strength < 40) {
+                strengthBar.style.backgroundColor = '#ef4444'; // red
+            } else if (strength < 80) {
+                strengthBar.style.backgroundColor = '#f59e0b'; // yellow
+            } else {
+                strengthBar.style.backgroundColor = '#10b981'; // green
+            }
+        }
+        
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const matchIndicator = document.getElementById('password-match');
+            const mismatchIndicator = document.getElementById('password-mismatch');
+            
+            if (confirmPassword.length === 0) {
+                matchIndicator.classList.add('hidden');
+                mismatchIndicator.classList.add('hidden');
+                return;
+            }
+            
+            if (password === confirmPassword) {
+                matchIndicator.classList.remove('hidden');
+                mismatchIndicator.classList.add('hidden');
+            } else {
+                matchIndicator.classList.add('hidden');
+                mismatchIndicator.classList.remove('hidden');
+            }
+        }
+        
+        function checkFormValidity() {
+            const username = document.getElementById('username').value;
+            const usernameValid = username.length >= 6 && username.length <= 20 && /^[a-zA-Z0-9]+$/.test(username);
+            
+            const password = document.getElementById('password').value;
+            const passwordValid = document.getElementById('password-strength-bar').style.width === '100%';
+            
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const confirmPasswordValid = password === confirmPassword && password.length > 0;
+            
+            const securityQuestionValid = document.getElementById('security-question').value !== '';
+            const securityAnswerValid = document.getElementById('security-answer').value !== '';
+            const termsAccepted = document.getElementById('terms').checked;
+            
+            // Enable/disable continue button
+            const continueButton = document.getElementById('continue-button');
+            if (usernameValid && passwordValid && confirmPasswordValid && 
+                securityQuestionValid && securityAnswerValid && termsAccepted) {
+                continueButton.disabled = false;
+            } else {
+                continueButton.disabled = true;
+            }
+        }
+
+        // Dynamic Footer Copyright
+        document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} RamzBank. All rights reserved.`;
+    </script>
+</body>
+</html>

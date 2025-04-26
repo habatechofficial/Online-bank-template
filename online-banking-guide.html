@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to use RamzBank Online Banking with our comprehensive guide.">
+    <title>Online Banking Guide | RamzBank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        dark: {
+                            DEFAULT: '#000000',
+                            secondary: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .guide-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/banners/guide-banner.jpg');
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            background-color: #2563eb;
+        }
+        
+        .dark .guide-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/banners/guide-banner.jpg');
+        }
+        
+        .guide-card {
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .dark .guide-card {
+            background: #1f2937;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-black dark:text-gray-200 transition-colors duration-300">
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary dark:text-white">Ramz<span class="text-blue-600 dark:text-blue-400">Bank</span></a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Home</a>
+                    <a href="accounts.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Accounts</a>
+                    <a href="loans.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Loans</a>
+                    <a href="investments.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Investments</a>
+                    <a href="about.html" class="font-medium hover:text-primary dark:hover:text-blue-400">About Us</a>
+                    <a href="contact.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-icon" class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                    <a href="login.html" class="hidden md:block bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-colors">
+                        Online Banking Login
+                    </a>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-bars text-gray-700 dark:text-gray-200"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="index.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Home</a>
+                <a href="accounts.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Accounts</a>
+                <a href="loans.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Loans</a>
+                <a href="investments.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Investments</a>
+                <a href="about.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">About Us</a>
+                <a href="contact.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Contact</a>
+                <a href="login.html" class="block mt-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium text-center transition-colors">
+                    Online Banking Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 dark:bg-gray-800 py-4">
+        <div class="container mx-auto px-4">
+            <nav aria-label="breadcrumb">
+                <ol class="flex space-x-2 text-sm">
+                    <li><a href="index.html" class="text-primary hover:underline">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-gray-500"></i></li>
+                    <li class="text-gray-600 dark:text-gray-400" aria-current="page">Online Banking Guide</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="guide-hero relative flex items-center justify-center">
+        <div class="text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Online Banking Guide</h1>
+            <p class="text-xl text-gray-200 max-w-2xl mx-auto">Everything you need to know to manage your accounts online</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <!-- Introduction -->
+                <div class="guide-card p-8 rounded-lg mb-12 animate-fade-in-up">
+                    <h2 class="text-2xl font-bold mb-6">Welcome to RamzBank Online Banking</h2>
+                    <p class="mb-6">Our online banking platform gives you secure, 24/7 access to your accounts from anywhere. This guide will help you get started and make the most of our digital banking features.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                        <div class="text-center">
+                            <div class="feature-icon bg-primary text-white mx-auto">
+                                <i class="fas fa-lock text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Secure Access</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Bank with confidence using our 256-bit encryption and multi-factor authentication.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="feature-icon bg-primary text-white mx-auto">
+                                <i class="fas fa-mobile-alt text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Mobile Friendly</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Access your accounts on any device with our responsive design.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="feature-icon bg-primary text-white mx-auto">
+                                <i class="fas fa-clock text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">24/7 Access</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Bank whenever it's convenient for you, day or night.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container rounded-lg overflow-hidden mb-8">
+                        <iframe src="https://www.youtube.com/embed/example" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <!-- Getting Started -->
+                <div class="guide-card p-8 rounded-lg mb-12 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <h2 class="text-2xl font-bold mb-6">Getting Started</h2>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="step-number bg-primary text-white">1</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Register for Online Banking</h3>
+                                <p class="mb-4">If you haven't already, you'll need to register for online banking. Click "Register" on the login page and follow the steps to create your account.</p>
+                                <a href="register.html" class="text-primary hover:underline font-medium">Go to Registration →</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="step-number bg-primary text-white">2</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Log In to Your Account</h3>
+                                <p class="mb-4">Visit our login page and enter your username and password. If this is your first time logging in, you may need to complete additional verification steps.</p>
+                                <a href="login.html" class="text-primary hover:underline font-medium">Go to Login →</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="step-number bg-primary text-white">3</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Set Up Your Dashboard</h3>
+                                <p>Customize your dashboard by adding your most-used features and accounts for quick access. Click the "Customize" button on your dashboard to get started.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Key Features -->
+                <div class="guide-card p-8 rounded-lg mb-12 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <h2 class="text-2xl font-bold mb-6">Key Features</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="border-l-4 border-primary pl-4">
+                            <h3 class="text-xl font-bold mb-2">Account Overview</h3>
+                            <p class="text-gray-600 dark:text-gray-400">View all your accounts in one place with current balances and recent transactions.</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4">
+                            <h3 class="text-xl font-bold mb-2">Transfer Funds</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Move money between your accounts or to other RamzBank customers.</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4">
+                            <h3 class="text-xl font-bold mb-2">Bill Pay</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Pay bills online to thousands of companies with our free bill pay service.</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4">
+                            <h3 class="text-xl font-bold mb-2">Mobile Deposit</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Deposit checks using your mobile device camera.</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4">
+                            <h3 class="text-xl font-bold mb-2">Alerts & Notifications</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Set up custom alerts for account activity, balances, and more.</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4">
+                            <h3 class="text-xl font-bold mb-2">Card Controls</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Turn your debit card on/off or set spending limits.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security Tips -->
+                <div class="guide-card p-8 rounded-lg animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <h2 class="text-2xl font-bold mb-6">Security Best Practices</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-red-600 dark:text-red-400">What to Avoid</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <span>Never share your password or security questions</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <span>Avoid using public Wi-Fi for banking</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <span>Don't click links in suspicious emails</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                                    <span>Never provide your full account number via email</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-green-600 dark:text-green-400">Recommended Practices</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Use a strong, unique password</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Enable two-factor authentication</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Regularly review account activity</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Keep your contact information updated</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+                        <h3 class="text-lg font-bold mb-2 text-blue-800 dark:text-blue-200">Need More Help?</h3>
+                        <p class="mb-4 text-blue-700 dark:text-blue-300">Our customer support team is available 24/7 to assist with any questions about online banking.</p>
+                        <a href="contact.html" class="inline-block bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-2 rounded-md font-medium transition-colors dark:bg-blue-800 dark:hover:bg-blue-700 dark:text-blue-100">
+                            Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+                
+                <div class="space-y-4">
+                    <div class="guide-card p-6 rounded-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="font-bold">How do I reset my password?</h3>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content mt-3 hidden">
+                            <p>To reset your password, click the "Forgot Password" link on the login page. You'll need to verify your identity through email or SMS, then you can create a new password.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-card p-6 rounded-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="font-bold">Is there a mobile app available?</h3>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content mt-3 hidden">
+                            <p>Yes! RamzBank offers a full-featured mobile app for both iOS and Android devices. You can download it from the App Store or Google Play Store.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-card p-6 rounded-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="font-bold">What should I do if I suspect fraudulent activity?</h3>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content mt-3 hidden">
+                            <p>If you notice any suspicious activity, immediately contact our 24/7 fraud hotline at 1-800-RAMZ-BANK and change your online banking password. You can also freeze your card through the online banking interface.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-card p-6 rounded-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="font-bold">Can I set up automatic bill payments?</h3>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content mt-3 hidden">
+                            <p>Yes, our bill pay feature allows you to set up both one-time and recurring payments. You can schedule payments to be deducted from your chosen account on specific dates.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-card p-6 rounded-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="font-bold">How do I update my contact information?</h3>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content mt-3 hidden">
+                            <p>You can update your email, phone number, and mailing address by going to the "Profile & Settings" section of online banking. Some changes may require verification for security purposes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download App CTA -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-2xl font-bold mb-4">Bank On The Go With Our Mobile App</h2>
+                <p class="mb-8 max-w-2xl mx-auto">Download the RamzBank app to access your accounts, deposit checks, pay bills, and more from your smartphone.</p>
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#" class="bg-black hover:bg-gray-900 text-white px-6 py-3 rounded-md font-medium transition-colors flex items-center">
+                        <i class="fab fa-apple text-2xl mr-2"></i>
+                        <div class="text-left">
+                            <div class="text-xs">Download on the</div>
+                            <div class="text-lg">App Store</div>
+                        </div>
+                    </a>
+                    <a href="#" class="bg-black hover:bg-gray-900 text-white px-6 py-3 rounded-md font-medium transition-colors flex items-center">
+                        <i class="fab fa-google-play text-2xl mr-2"></i>
+                        <div class="text-left">
+                            <div class="text-xs">Get it on</div>
+                            <div class="text-lg">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">RamzBank</h3>
+                    <p class="mb-4">Innovative banking solutions for the digital age.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accounts.html" class="hover:text-white">Personal Banking</a></li>
+                        <li><a href="accounts.html" class="hover:text-white">Business Banking</a></li>
+                        <li><a href="loans.html" class="hover:text-white">Loans</a></li>
+                        <li><a href="investments.html" class="hover:text-white">Investments</a></li>
+                        <li><a href="credit-cards.html" class="hover:text-white">Credit Cards</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="careers.html" class="hover:text-white">Careers</a></li>
+                        <li><a href="newsroom.html" class="hover:text-white">Newsroom</a></li>
+                        <li><a href="investor-relations.html" class="hover:text-white">Investor Relations</a></li>
+                        <li><a href="corporate-responsibility.html" class="hover:text-white">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="faqs.html" class="hover:text-white">FAQs</a></li>
+                        <li><a href="security-center.html" class="hover:text-white">Security Center</a></li>
+                        <li><a href="branch-locator.html" class="hover:text-white">Branch Locator</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-sm">
+                <p id="footer-copyright">© 2025 RamzBank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+        themeToggle.addEventListener('click', function() {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                }
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Dynamic Footer Copyright
+        document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} RamzBank. All rights reserved.`;
+    </script>
+</body>
+</html>

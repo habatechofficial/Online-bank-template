@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about RamzBank's security measures and tips to protect your financial information.">
+    <title>Security Center | RamzBank - Stay Protected</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        dark: {
+                            DEFAULT: '#000000',
+                            secondary: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .security-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/banners/security-banner.jpg');
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            background-color: #2563eb;
+        }
+        
+        .dark .security-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/banners/security-banner.jpg');
+        }
+        
+        .security-card {
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .security-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .security-card {
+            background: #1f2937;
+        }
+        
+        .dark .security-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.05);
+        }
+        
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            width: 50px;
+            height: 50px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-to-top:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .back-to-top {
+            background: #1e40af;
+        }
+        
+        .dark .back-to-top:hover {
+            background: #2563eb;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .security-card { opacity: 0; transform: translateY(20px); }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+        
+        .pulse-animation { animation: pulse 2s infinite; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-black dark:text-gray-200 transition-colors duration-300">
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary dark:text-white">Ramz<span class="text-blue-600 dark:text-blue-400">Bank</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Home</a>
+                    <a href="accounts.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Accounts</a>
+                    <a href="loans.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Loans</a>
+                    <a href="investments.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Investments</a>
+                    <a href="about.html" class="font-medium hover:text-primary on dark:hover:text-blue-400">About Us</a>
+                    <a href="contact.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Contact</a>
+                    <a href="credit-cards.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Credit Cards</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-icon" class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                    <a href="login.html" class="hidden md:block bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-colors">
+                        Online Banking Login
+                    </a>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-bars text-gray-700 dark:text-gray-200"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="index.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Home</a>
+                <a href="accounts.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Accounts</a>
+                <a href="loans.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Loans</a>
+                <a href="investments.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Investments</a>
+                <a href="about.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">About Us</a>
+                <a href="contact.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Contact</a>
+                <a href="credit-cards.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Credit Cards</a>
+                <a href="login.html" class="block mt-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium text-center transition-colors">
+                    Online Banking Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 dark:bg-gray-800 py-4">
+        <div class="container mx-auto px-4">
+            <nav aria-label="breadcrumb">
+                <ol class="flex space-x-2 text-sm">
+                    <li><a href="index.html" class="text-primary hover:underline">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-gray-500"></i></li>
+                    <li class="text-gray-600 dark:text-gray-400" aria-current="page">Security Center</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="security-hero relative flex items-center justify-center">
+        <div class="text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Security Center</h1>
+            <p class="text-xl text-gray-200 max-w-2xl mx-auto">Your safety is our priority</p>
+        </div>
+    </div>
+
+    <!-- Overview Section -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Protecting Your Finances</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Learn how RamzBank keeps your accounts secure and how you can stay safe.
+                </p>
+            </div>
+            <div class="max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
+                <p class="mb-4">
+                    At RamzBank, we use state-of-the-art security measures to protect your financial information. From encryption to fraud detection, we’re committed to your safety. Explore our security practices and tips to safeguard your accounts.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Measures Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Our Security Measures</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Advanced technology to keep you protected.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="security-card p-6 rounded-lg shadow-md">
+                    <div class="text-primary dark:text-blue-400 mb-4">
+                        <i class="fas fa-lock text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Encryption</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        256-bit SSL encryption for all online transactions.
+                    </p>
+                </div>
+                <div class="security-card p-6 rounded-lg shadow-md">
+                    <div class="text-primary dark:text-blue-400 mb-4">
+                        <i class="fas fa-shield-alt text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Fraud Detection</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Real-time monitoring to detect and prevent fraud.
+                    </p>
+                </div>
+                <div class="security-card p-6 rounded-lg shadow-md">
+                    <div class="text-primary dark:text-blue-400 mb-4">
+                        <i class="fas fa-fingerprint text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Biometric Authentication</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Secure login with fingerprint or facial recognition.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Tips Section -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Safety Tips for You</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Stay vigilant with these best practices.
+                </p>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                <ul class="space-y-4 text-gray-600 dark:text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                        <span>Use strong, unique passwords and update them regularly.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                        <span>Enable two-factor authentication (2FA) for added security.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                        <span>Avoid sharing personal information via email or phone.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                        <span>Regularly monitor your accounts for suspicious activity.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary dark:bg-gray-800 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Report Suspicious Activity</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Contact us immediately if you suspect fraud or unauthorized access.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="contact.html" class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-md font-bold transition-colors pulse-animation">
+                    Contact Us
+                </a>
+                <a href="login.html" class="border-2 border-white hover:bg-white hover:text-primary px-8 py-3 rounded-md font-bold transition-colors">
+                    Online Banking Login
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">RamzBank</h3>
+                    <p class="mb-4">Innovative banking solutions for the digital age.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accounts.html" class="hover:text-white">Personal Banking</a></li>
+                        <li><a href="accounts.html" class="hover:text-white">Business Banking</a></li>
+                        <li><a href="loans.html" class="hover:text-white">Loans</a></li>
+                        <li><a href="investments.html" class="hover:text-white">Investments</a></li>
+                        <li><a href="credit-cards.html" class="hover:text-white">Credit Cards</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="careers.html" class="hover:text-white">Careers</a></li>
+                        <li><a href="newsroom.html" class="hover:text-white">Newsroom</a></li>
+                        <li><a href="investor-relations.html" class="hover:text-white">Investor Relations</a></li>
+                        <li><a href="corporate-responsibility.html" class="hover:text-white">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="faqs.html" class="hover:text-white">FAQs</a></li>
+                        <li><a href="security-center.html" class="hover:text-white">Security Center</a></li>
+                        <li><a href="branch-locator.html" class="hover:text-white">Branch Locator</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-sm">
+                <p id="footer-copyright">© 2025 RamzBank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+        themeToggle.addEventListener('click', function() {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                }
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Animate Security Cards on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = `fadeInUp 0.5s ${index * 0.1}s ease-out forwards`;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.security-card').forEach(card => observer.observe(card));
+
+        // Dynamic Footer Copyright
+        document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} RamzBank. All rights reserved.`;
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Fraud | RamzBank - Secure Banking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Your existing template styles here */
+        .report-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/report-banner.jpg');
+            background-size: cover;
+        }
+        .report-form {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .dark .report-form {
+            background: #1f2937;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Navigation (Same as your template) -->
+
+    <!-- Hero Section -->
+    <div class="report-hero py-20 text-center text-white">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Report Suspicious Activity</h1>
+            <p class="text-xl max-w-2xl mx-auto">Help us keep your accounts secure by reporting potential fraud</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="report-form p-8">
+                <h2 class="text-2xl font-bold mb-6">Fraud Report Form</h2>
+                
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Type of Suspicious Activity</label>
+                        <select class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+                            <option>Phishing attempt</option>
+                            <option>Unauthorized transaction</option>
+                            <option>Account takeover attempt</option>
+                            <option>Other suspicious activity</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Description</label>
+                        <textarea rows="5" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500" placeholder="Provide detailed information about the incident"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Date of Incident</label>
+                        <input type="date" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Upload Evidence (Screenshots, emails, etc.)</label>
+                        <div class="border-2 border-dashed rounded-md p-4 text-center">
+                            <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                            <p class="text-sm text-gray-500">Drag & drop files here or click to browse</p>
+                            <input type="file" class="hidden">
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input type="checkbox" class="focus:ring-blue-500 h-4 w-4 text-blue-600 rounded">
+                        </div>
+                        <div class="ml-3 text-sm">
+                            <label>I confirm this report is made in good faith</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-4 rounded-md font-medium transition-colors">
+                        Submit Fraud Report
+                    </button>
+                </form>
+
+                <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-600">
+                    <h3 class="text-lg font-medium mb-3">Emergency Contacts</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-medium mb-1"><i class="fas fa-phone-alt mr-2 text-blue-500"></i> Fraud Hotline</h4>
+                            <p class="text-gray-600 dark:text-gray-300">1800-123-4567 (24/7)</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-medium mb-1"><i class="fas fa-envelope mr-2 text-blue-500"></i> Email</h4>
+                            <p class="text-gray-600 dark:text-gray-300">fraud@ramzbank.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Same as your template) -->
+</body>
+</html>

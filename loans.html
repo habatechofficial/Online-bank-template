@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loans | RamzBank - Flexible Financing Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        dark: {
+                            DEFAULT: '#000000',
+                            secondary: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .loans-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/banners/loans-banner.jpg');
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .dark .loans-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/banners/loans-banner.jpg');
+        }
+        
+        .loan-card {
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .loan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .loan-card {
+            background: #1f2937;
+        }
+        
+        .dark .loan-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.05);
+        }
+        
+        .calculator-box {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .calculator-box {
+            background: #1f2937;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            width: 50px;
+            height: 50px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-to-top:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .back-to-top {
+            background: #1e40af;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark .back-to-top:hover {
+            background: #2563eb;
+        }
+        
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background-color: #2563eb;
+            color: white;
+        }
+        
+        .dark .tab-button.active {
+            background-color: #1e40af;
+        }
+    </style>
+    <style>
+    /* FAQ Answer Transitions */
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    
+    /* Tooltip Styles */
+    .tooltip-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        background-color: #2563eb;
+        color: white;
+        border-radius: 50%;
+        font-size: 12px;
+        margin-left: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .dark .tooltip-icon {
+        background-color: #1e40af;
+    }
+    
+    /* Keyframe Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Loan Card Animations */
+    .loan-card {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    /* Process Step Animations */
+    .process-step {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.5s ease;
+    }
+    
+    .process-step.animate {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    /* Button Hover Effects */
+    .btn-hover-effect {
+        transition: all 0.3s ease;
+        transform: translateY(0);
+    }
+    
+    .btn-hover-effect:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dark .btn-hover-effect:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Form Input Transitions */
+    .form-input {
+        transition: all 0.3s ease;
+        box-shadow: 0 0 0 1px #e5e7eb;
+    }
+    
+    .form-input:focus {
+        box-shadow: 0 0 0 2px #2563eb;
+    }
+    
+    .dark .form-input {
+        box-shadow: 0 0 0 1px #374151;
+    }
+    
+    .dark .form-input:focus {
+        box-shadow: 0 0 0 2px #1e40af;
+    }
+    
+    /* Rotate Animation for FAQ Icons */
+    .rotate-180 {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+    }
+    
+    /* Pulse Animation for CTA */
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+        }
+        70% {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+        }
+    }
+    
+    .pulse-animation {
+        animation: pulse 2s infinite;
+    }
+    
+    /* Loading Spinner */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .loading-spinner {
+        animation: spin 1s linear infinite;
+    }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-black dark:text-gray-200 transition-colors duration-300">
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary dark:text-white">Ramz<span class="text-blue-600 dark:text-blue-400">Bank</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Home</a>
+                    <a href="accounts.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Accounts</a>
+                    <a href="loans.html" class="font-medium text-primary dark:text-blue-400">Loans</a>
+                    <a href="investments.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Investments</a>
+                    <a href="about.html" class="font-medium hover:text-primary dark:hover:text-blue-400">About Us</a>
+                    <a href="contact.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Contact</a>
+                </div>
+                
+                <!-- Right Side Items -->
+                <div class="flex items-center space-x-4">
+                    <!-- Dark/Light Mode Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-icon" class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                    
+                    
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-bars text-gray-700 dark:text-gray-200"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu (Hidden by default) -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="index.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Home</a>
+                <a href="accounts.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Accounts</a>
+                <a href="loans.html" class="block py-2 px-4 bg-primary text-white rounded-md">Loans</a>
+                <a href="investments.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Investments</a>
+                <a href="about.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">About Us</a>
+                <a href="contact.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Contact</a>
+                <a href="login.html" class="block mt-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium text-center transition-colors">
+                    Online Banking Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <div class="loans-hero relative flex items-center justify-center h-96 bg-cover bg-center" style="background-image: url('assets/images/banners/banner.jpg');">
+        <div class="text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Flexible Loan Solutions</h1>
+            <p class="text-xl text-gray-200 max-w-2xl mx-auto">Competitive rates and personalized options for all your financing needs</p>
+        </div>
+    </div>
+
+    <!-- Loan Products Section -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Our Loan Products</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Find the perfect loan option for your personal or business needs
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Personal Loan Card -->
+                <div class="loan-card p-6 rounded-lg shadow-md">
+                    <div class="text-primary dark:text-blue-400 mb-4">
+                        <i class="fas fa-user text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Personal Loans</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Finance your dreams with competitive rates and flexible terms. Perfect for debt consolidation, home improvements, or major purchases.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Loan amounts from $1,000 to $50,000</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Fixed rates from 5.99% APR</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Terms from 12 to 60 months</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-md font-medium transition-colors">
+                        Apply Now
+                    </a>
+                </div>
+                
+                <!-- Mortgage Loan Card -->
+                <div class="loan-card p-6 rounded-lg shadow-md">
+                    <div class="text-primary dark:text-blue-400 mb-4">
+                        <i class="fas fa-home text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Mortgage Loans</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Make homeownership a reality with our competitive mortgage options, including fixed-rate and adjustable-rate mortgages.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Fixed rates from 5.75% APR</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>15 to 30 year terms available</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Low down payment options</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-md font-medium transition-colors">
+                        Get Pre-Approved
+                    </a>
+                </div>
+                
+                <!-- Auto Loan Card -->
+                <div class="loan-card p-6 rounded-lg shadow-md">
+                    <div class="text-primary dark:text-blue-400 mb-4">
+                        <i class="fas fa-car text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Auto Loans</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Drive away in your dream car with our low-rate auto loans for new and used vehicles.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Rates as low as 4.99% APR</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Loan terms up to 72 months</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Fast online approval</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-md font-medium transition-colors">
+                        Check Rates
+                    </a>
+                </div>
+                
+                <!-- Business Loan Card -->
+                <div class="loan-card p-6 rounded-lg shadow-md">
+                    <div class="text-primary dark:text-blue-400 mb-4">
+                        <i class="fas fa-briefcase text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Business Loans</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Grow your business with flexible financing options tailored to your company's needs.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Loans from $10,000 to $500,000</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Fixed and variable rate options</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Terms from 1 to 7 years</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-md font-medium transition-colors">
+                        Explore Options
+                    </a>
+                </div>
+                
+                <!-- Student Loan Card -->
+                <div class="loan-card p-6 rounded-lg shadow-md">
+                    <div class="text-primary dark:text-blue-400 mb-4">
+                        <i class="fas fa-graduation-cap text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Student Loans</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Invest in your education with competitive student loan options for undergraduate and graduate studies.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Fixed rates from 4.50% APR</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Flexible repayment options</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Cosigner release available</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-md font-medium transition-colors">
+                        Learn More
+                    </a>
+                </div>
+                
+                <!-- Home Equity Loan Card -->
+                <div class="loan-card p-6 rounded-lg shadow-md">
+                    <div class="text-primary dark:text-blue-400 mb-4">
+                        <i class="fas fa-house-user text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Home Equity Loans</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Tap into your home's equity for major expenses with predictable monthly payments.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Borrow up to 85% of your home's value</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Fixed rates from 6.25% APR</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Terms from 5 to 20 years</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-md font-medium transition-colors">
+                        Calculate Equity
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loan Calculator Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Loan Calculator</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Estimate your monthly payments and find the right loan for your budget
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="calculator-box p-6">
+                    <!-- Calculator Tabs -->
+                    <div class="flex mb-6 border-b border-gray-200 dark:border-gray-700">
+                        <button class="tab-button px-4 py-2 rounded-t-lg mr-2 active" data-tab="personal">
+                            Personal Loan
+                        </button>
+                        <button class="tab-button px-4 py-2 rounded-t-lg mr-2" data-tab="auto">
+                            Auto Loan
+                        </button>
+                        <button class="tab-button px-4 py-2 rounded-t-lg" data-tab="mortgage">
+                            Mortgage
+                        </button>
+                    </div>
+                    
+                    <!-- Calculator Form -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="mb-4">
+                                <label for="loan-amount" class="block text-sm font-medium mb-2">Loan Amount ($)</label>
+                                <input type="range" id="loan-amount" min="1000" max="100000" step="1000" value="25000" class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>1,000</span>
+                                    <span id="loan-amount-value">25,000</span>
+                                    <span>100,000</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="interest-rate" class="block text-sm font-medium mb-2">Interest Rate (%)</label>
+                                <input type="range" id="interest-rate" min="1" max="20" step="0.1" value="6.5" class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>1%</span>
+                                    <span id="interest-rate-value">6.5%</span>
+                                    <span>20%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="loan-term" class="block text-sm font-medium mb-2">Loan Term (years)</label>
+                                <input type="range" id="loan-term" min="1" max="30" step="1" value="5" class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>1</span>
+                                    <span id="loan-term-value">5</span>
+                                    <span>30</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">Estimated Payment</h3>
+                            <div class="mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span>Monthly Payment:</span>
+                                    <span id="monthly-payment" class="font-bold">$487.50</span>
+                                </div>
+                                <div class="flex justify-between mb-2">
+                                    <span>Total Interest:</span>
+                                    <span id="total-interest" class="font-bold">$4,250.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Total Payment:</span>
+                                    <span id="total-payment" class="font-bold">$29,250.00</span>
+                                </div>
+                            </div>
+                            <button id="calculate-btn" class="w-full bg-primary hover:bg-primary-dark text-white py-2 rounded-md font-medium transition-colors">
+                                Calculate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loan Process Section -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Simple Loan Process</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Get the funds you need quickly with our streamlined application process
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Apply Online</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Complete our simple application in just minutes
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Get Approved</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Receive a decision quickly, often within hours
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Review Terms</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Choose the loan option that works best for you
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">4</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Receive Funds</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Get your money as soon as the next business day
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">What Our Customers Say</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Hear from people who've used our loan services
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">2 days ago</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        "The auto loan process was so easy! I got approved in minutes and the rate was much better than other banks offered."
+                    </p>
+                    <div class="flex items-center">
+                        <img src="assets/images/testimonial-1.jpg" alt="Sarah J." class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-bold">Sarah J.</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Auto Loan Customer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">1 week ago</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        "Used a personal loan to consolidate credit card debt. The rate cut my interest payments in half. Very happy with the service!"
+                    </p>
+                    <div class="flex items-center">
+                        <img src="assets/images/testimonial-2.jpg" alt="Michael T." class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-bold">Michael T.</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Personal Loan Customer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">3 weeks ago</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        "The mortgage team was incredibly helpful in walking us through our first home purchase. They made a stressful process much easier."
+                    </p>
+                    <div class="flex items-center">
+                        <img src="assets/images/testimonial-3.jpg" alt="David & Lisa R." class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-bold">David & Lisa R.</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Mortgage Customers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <!-- FAQ Section -->
+<section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Get answers to common questions about our loan products
+            </p>
+        </div>
+        
+        <div class="max-w-3xl mx-auto">
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium" aria-expanded="false" aria-controls="faq-answer-1">
+                        <span>What credit score do I need to qualify for a loan?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-1" class="faq-answer mt-2 text-gray-600 dark:text-gray-300">
+                        <p>
+                            Credit score requirements vary by loan type. Personal loans typically require a minimum score of 620, 
+                            while mortgage loans may require higher scores depending on the program. We evaluate your entire financial 
+                            profile, not just your credit score, so even if your score is below our typical requirements, you may still qualify.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium" aria-expanded="false" aria-controls="faq-answer-2">
+                        <span>How long does the loan approval process take?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-2" class="faq-answer mt-2 text-gray-600 dark:text-gray-300">
+                        <p>
+                            For personal and auto loans, many applicants receive an instant decision online. Final approval and funding 
+                            typically occurs within 1-2 business days after we receive all required documentation. Mortgage loans take 
+                            longer due to property appraisal and underwriting requirements, usually 30-45 days from application to closing.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium" aria-expanded="false" aria-controls="faq-answer-3">
+                        <span>Are there any prepayment penalties?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-3" class="faq-answer mt-2 text-gray-600 dark:text-gray-300">
+                        <p>
+                            No, RamzBank does not charge prepayment penalties on any of our loan products. You can pay off your loan early 
+                            at any time without incurring additional fees. In fact, paying off your loan early may save you money on interest.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium" aria-expanded="false" aria-controls="faq-answer-4">
+                        <span>What documents do I need to apply for a loan?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-4" class="faq-answer mt-2 text-gray-600 dark:text-gray-300">
+                        <p>
+                            Required documents vary by loan type. For most loans, you'll need:
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Government-issued ID</li>
+                                <li>Proof of income (pay stubs, tax returns, or bank statements)</li>
+                                <li>Proof of residence</li>
+                                <li>Social Security number</li>
+                                <li>For mortgages: additional documentation about the property and your financial history</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium" aria-expanded="false" aria-controls="faq-answer-5">
+                        <span>Can I refinance an existing loan with RamzBank?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-5" class="faq-answer mt-2 text-gray-600 dark:text-gray-300">
+                        <p>
+                            Yes, we offer refinancing options for auto loans, personal loans, and mortgages. Refinancing may help you 
+                            secure a lower interest rate, reduce your monthly payment, or change your loan term. Our loan officers can 
+                            review your current loan terms and help determine if refinancing makes financial sense for your situation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 bg-primary dark:bg-gray-800 text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6">Ready to apply for a loan?</h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">Get started today with our simple online application.</p>
+        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="#" class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-md font-bold transition-colors">
+                Apply Now
+            </a>
+            <a href="contact.html" class="border-2 border-white hover:bg-white hover:text-primary px-8 py-3 rounded-md font-bold transition-colors">
+                Talk to a Loan Officer
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-gray-300 py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4">RamzBank</h3>
+                <p class="mb-4">Innovative banking solutions for the digital age.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4">Services</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white">Personal Banking</a></li>
+                    <li><a href="#" class="hover:text-white">Business Banking</a></li>
+                    <li><a href="loans.html" class="hover:text-white">Loans</a></li>
+                    <li><a href="#" class="hover:text-white">Investments</a></li>
+                    <li><a href="#" class="hover:text-white">Credit Cards</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4">Company</h3>
+                <ul class="space-y-2">
+                    <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                    <li><a href="#" class="hover:text-white">Careers</a></li>
+                    <li><a href="#" class="hover:text-white">Newsroom</a></li>
+                    <li><a href="#" class="hover:text-white">Investor Relations</a></li>
+                    <li><a href="#" class="hover:text-white">Corporate Responsibility</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-white">FAQs</a></li>
+                    <li><a href="#" class="hover:text-white">Security Center</a></li>
+                    <li><a href="#" class="hover:text-white">Branch Locator</a></li>
+                    <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-gray-700 text-center text-sm">
+            <p>&copy; 2023 RamzBank. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top Button -->
+<div class="back-to-top" id="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<<script>
+    // Dark/Light Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    // Check for saved user preference or use system preference
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+        document.documentElement.classList.remove('dark');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+    
+    // Toggle between dark and light mode
+    themeToggle.addEventListener('click', function() {
+        if (localStorage.getItem('color-theme')) {
+            if (localStorage.getItem('color-theme') === 'light') {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        } else {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+    });
+    
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenuButton.querySelector('i').classList.toggle('fa-bars');
+        mobileMenuButton.querySelector('i').classList.toggle('fa-times');
+    });
+    
+    // Back to Top Button
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.style.display = 'flex';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
+    
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Loan Calculator Functionality
+    const loanAmountSlider = document.getElementById('loan-amount');
+    const interestRateSlider = document.getElementById('interest-rate');
+    const loanTermSlider = document.getElementById('loan-term');
+    
+    const loanAmountValue = document.getElementById('loan-amount-value');
+    const interestRateValue = document.getElementById('interest-rate-value');
+    const loanTermValue = document.getElementById('loan-term-value');
+    
+    const monthlyPayment = document.getElementById('monthly-payment');
+    const totalInterest = document.getElementById('total-interest');
+    const totalPayment = document.getElementById('total-payment');
+    
+    const calculateBtn = document.getElementById('calculate-btn');
+    
+    // Update displayed values when sliders change
+    loanAmountSlider.addEventListener('input', function() {
+        loanAmountValue.textContent = Number(this.value).toLocaleString();
+    });
+    
+    interestRateSlider.addEventListener('input', function() {
+        interestRateValue.textContent = this.value + '%';
+    });
+    
+    loanTermSlider.addEventListener('input', function() {
+        loanTermValue.textContent = this.value;
+    });
+    
+    // Calculate loan when button clicked or slider changes
+    calculateBtn.addEventListener('click', calculateLoan);
+    loanAmountSlider.addEventListener('change', calculateLoan);
+    interestRateSlider.addEventListener('change', calculateLoan);
+    loanTermSlider.addEventListener('change', calculateLoan);
+    
+    // Initial calculation
+    calculateLoan();
+    
+    function calculateLoan() {
+        const amount = parseFloat(loanAmountSlider.value);
+        const rate = parseFloat(interestRateSlider.value) / 100 / 12;
+        const term = parseFloat(loanTermSlider.value) * 12;
+        
+        // Calculate monthly payment using standard formula
+        const monthly = (amount * rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1);
+        const total = monthly * term;
+        const interest = total - amount;
+        
+        // Update display with formatted currency
+        monthlyPayment.textContent = formatCurrency(monthly);
+        totalInterest.textContent = formatCurrency(interest);
+        totalPayment.textContent = formatCurrency(total);
+    }
+    
+    function formatCurrency(value) {
+        return '$' + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    }
+    
+    // Tab functionality for calculator
+    const tabButtons = document.querySelectorAll('.tab-button');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Update calculator defaults based on selected tab
+            const tab = this.dataset.tab;
+            if (tab === 'personal') {
+                updateCalculatorSettings(1000, 50000, 10000, 8.5, 1, 5, 3);
+                document.getElementById('loan-purpose').textContent = "Personal expenses, debt consolidation, or major purchases";
+            } else if (tab === 'auto') {
+                updateCalculatorSettings(5000, 100000, 25000, 5.5, 2, 7, 5);
+                document.getElementById('loan-purpose').textContent = "New or used vehicle purchase";
+            } else if (tab === 'mortgage') {
+                updateCalculatorSettings(50000, 1000000, 250000, 6.25, 10, 30, 30);
+                document.getElementById('loan-purpose').textContent = "Home purchase or refinance";
+            }
+            
+            // Recalculate loan with new values
+            calculateLoan();
+        });
+    });
+    
+    function updateCalculatorSettings(minAmount, maxAmount, defaultAmount, defaultRate, minTerm, maxTerm, defaultTerm) {
+        loanAmountSlider.min = minAmount;
+        loanAmountSlider.max = maxAmount;
+        loanAmountSlider.value = defaultAmount;
+        interestRateSlider.value = defaultRate;
+        loanTermSlider.min = minTerm;
+        loanTermSlider.max = maxTerm;
+        loanTermSlider.value = defaultTerm;
+        
+        // Update displayed values
+        loanAmountValue.textContent = Number(defaultAmount).toLocaleString();
+        interestRateValue.textContent = defaultRate + '%';
+        loanTermValue.textContent = defaultTerm;
+    }
+    
+    // Enhanced FAQ accordion functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        // Initialize each FAQ item
+        const answer = question.nextElementSibling;
+        const icon = question.querySelector('i');
+        
+        // Set initial state
+        answer.style.maxHeight = '0';
+        answer.style.overflow = 'hidden';
+        answer.style.transition = 'max-height 0.3s ease-out';
+        
+        question.addEventListener('click', function() {
+            // Toggle this FAQ item
+            const isOpening = answer.style.maxHeight === '0px';
+            
+            // Close all other FAQs first
+            faqQuestions.forEach(q => {
+                if (q !== question) {
+                    const otherAnswer = q.nextElementSibling;
+                    const otherIcon = q.querySelector('i');
+                    otherAnswer.style.maxHeight = '0';
+                    otherIcon.classList.remove('rotate-180');
+                }
+            });
+            
+            // Toggle current FAQ
+            answer.style.maxHeight = isOpening ? answer.scrollHeight + 'px' : '0';
+            icon.classList.toggle('rotate-180');
+        });
+    });
+
+    // Form validation for loan application
+    const loanForm = document.getElementById('loan-application-form');
+    if (loanForm) {
+        loanForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const loanAmount = parseFloat(document.getElementById('application-amount').value);
+            const loanType = document.getElementById('application-type').value;
+            const email = document.getElementById('application-email').value;
+            
+            // Validate inputs
+            let isValid = true;
+            const errorMessages = [];
+            
+            if (isNaN(loanAmount) || loanAmount <= 0) {
+                isValid = false;
+                errorMessages.push('Please enter a valid loan amount');
+            }
+            
+            if (loanType === '') {
+                isValid = false;
+                errorMessages.push('Please select a loan type');
+            }
+            
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                isValid = false;
+                errorMessages.push('Please enter a valid email address');
+            }
+            
+            // Show errors or submit
+            if (!isValid) {
+                alert('Please fix the following errors:\n\n' + errorMessages.join('\n'));
+            } else {
+                // In a real application, you would submit to server here
+                alert('Application submitted successfully! A loan officer will contact you shortly.');
+                this.reset();
+            }
+        });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const navbarHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = targetElement.offsetTop - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update URL without jumping
+                if (history.pushState) {
+                    history.pushState(null, null, targetId);
+                } else {
+                    location.hash = targetId;
+                }
+            }
+        });
+    });
+
+    // Initialize tooltips
+    if (typeof tippy !== 'undefined') {
+        tippy('[data-tippy-content]', {
+            arrow: true,
+            animation: 'shift-away',
+            duration: 200,
+            theme: 'light-border',
+            onShow(instance) {
+                if (document.documentElement.classList.contains('dark')) {
+                    instance.setProps({ theme: 'dark' });
+                } else {
+                    instance.setProps({ theme: 'light-border' });
+                }
+            }
+        });
+    }
+
+    // Observe theme changes for tooltips
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                if (typeof tippy !== 'undefined') {
+                    tippy('[data-tippy-content]', {
+                        theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light-border'
+                    });
+                }
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
+
+    // Animate loan cards on scroll
+    const animateOnScroll = function() {
+        const loanCards = document.querySelectorAll('.loan-card');
+        const windowHeight = window.innerHeight;
+        
+        loanCards.forEach((card, index) => {
+            const cardPosition = card.getBoundingClientRect().top;
+            const animationDelay = index * 0.1;
+            
+            if (cardPosition < windowHeight - 100) {
+                card.style.animation = `fadeInUp 0.5s ${animationDelay}s ease-out forwards`;
+                card.style.opacity = '0';
+            }
+        });
+    };
+    
+    // Run once on load and then on scroll
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+</script>
+</body>
+</html>

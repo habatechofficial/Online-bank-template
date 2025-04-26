@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RamzBank Terms of Service - Understand our banking terms and conditions">
+    <title>Terms of Service | RamzBank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        dark: {
+                            DEFAULT: '#000000',
+                            secondary: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .terms-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/banners/legal-banner.jpg');
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            background-color: '#2563eb';
+        }
+        
+        .dark .terms-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/banners/legal-banner.jpg');
+        }
+        
+        .terms-container {
+            transition: all 0.3s ease;
+            background: white;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .dark .terms-container {
+            background: #1f2937;
+        }
+        
+        .terms-section {
+            scroll-margin-top: 120px;
+        }
+        
+        .terms-nav li.active a {
+            color: #2563eb;
+            font-weight: 600;
+            border-left: 3px solid #2563eb;
+        }
+        
+        .dark .terms-nav li.active a {
+            color: #3b82f6;
+            border-left-color: #3b82f6;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            width: 50px;
+            height: 50px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-to-top:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .back-to-top {
+            background: #1e40af;
+        }
+        
+        .dark .back-to-top:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-black dark:text-gray-200 transition-colors duration-300">
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary dark:text-white">Ramz<span class="text-blue-600 dark:text-blue-400">Bank</span></a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Home</a>
+                    <a href="accounts.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Accounts</a>
+                    <a href="loans.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Loans</a>
+                    <a href="investments.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Investments</a>
+                    <a href="about.html" class="font-medium hover:text-primary dark:hover:text-blue-400">About Us</a>
+                    <a href="contact.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-icon" class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                    <a href="login.html" class="hidden md:block bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-colors">
+                        Online Banking Login
+                    </a>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-bars text-gray-700 dark:text-gray-200"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="index.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Home</a>
+                <a href="accounts.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Accounts</a>
+                <a href="loans.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Loans</a>
+                <a href="investments.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Investments</a>
+                <a href="about.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">About Us</a>
+                <a href="contact.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Contact</a>
+                <a href="login.html" class="block mt-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium text-center transition-colors">
+                    Online Banking Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 dark:bg-gray-800 py-4">
+        <div class="container mx-auto px-4">
+            <nav aria-label="breadcrumb">
+                <ol class="flex space-x-2 text-sm">
+                    <li><a href="index.html" class="text-primary hover:underline">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-gray-500"></i></li>
+                    <li class="text-gray-600 dark:text-gray-400" aria-current="page">Terms of Service</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="terms-hero relative flex items-center justify-center">
+        <div class="text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Terms of Service</h1>
+            <p class="text-xl text-gray-200 max-w-2xl mx-auto">Last Updated: January 1, 2025</p>
+        </div>
+    </div>
+
+    <!-- Terms Content -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Navigation -->
+                <div class="lg:w-1/4">
+                    <div class="sticky top-32 terms-nav hidden lg:block">
+                        <h3 class="text-lg font-bold mb-4">Table of Contents</h3>
+                        <ul class="space-y-2">
+                            <li class="active"><a href="#introduction" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">1. Introduction</a></li>
+                            <li><a href="#accounts" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">2. Account Terms</a></li>
+                            <li><a href="#transactions" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">3. Transactions</a></li>
+                            <li><a href="#digital-banking" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">4. Digital Banking</a></li>
+                            <li><a href="#fees" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">5. Fees & Charges</a></li>
+                            <li><a href="#liability" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">6. Liability</a></li>
+                            <li><a href="#privacy" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">7. Privacy</a></li>
+                            <li><a href="#amendments" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">8. Amendments</a></li>
+                            <li><a href="#termination" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">9. Termination</a></li>
+                            <li><a href="#governing-law" class="block py-2 px-4 hover:text-primary dark:hover:text-blue-400 border-l-3 border-transparent">10. Governing Law</a></li>
+                        </ul>
+                        
+                        <div class="mt-8">
+                            <a href="privacy-policy.html" class="text-primary hover:underline font-medium flex items-center">
+                                <i class="fas fa-shield-alt mr-2"></i> View Privacy Policy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Content -->
+                <div class="lg:w-3/4">
+                    <div class="terms-container p-8 rounded-lg shadow-md">
+                        <div class="prose dark:prose-invert max-w-none">
+                            <!-- Introduction -->
+                            <section id="introduction" class="terms-section mb-12">
+                                <h2 class="text-2xl font-bold mb-4">1. Introduction</h2>
+                                <p class="mb-4">These Terms of Service ("Terms") govern your relationship with RamzBank ("Bank", "we", "us", or "our") regarding the use of our banking services, including but not limited to deposit accounts, loans, digital banking, and other financial products.</p>
+                                <p class="mb-4">By opening an account, accessing our services, or using our website/mobile app, you agree to be bound by these Terms and all applicable laws and regulations. If you do not agree with any part of these Terms, you must not use our services.</p>
+                                <p>These Terms constitute a legally binding agreement between you and RamzBank. Please read them carefully.</p>
+                            </section>
+                            
+                            <!-- Account Terms -->
+                            <section id="accounts" class="terms-section mb-12">
+                                <h2 class="text-2xl font-bold mb-4">2. Account Terms</h2>
+                                <h3 class="text-xl font-bold mb-2">2.1 Account Opening</h3>
+                                <p class="mb-4">To open an account with RamzBank, you must:</p>
+                                <ul class="list-disc pl-6 mb-4 space-y-2">
+                                    <li>Be at least 18 years of age (or the age of majority in your jurisdiction)</li>
+                                    <li>Provide accurate and complete personal information</li>
+                                    <li>Submit required identification documents</li>
+                                    <li>Meet our eligibility requirements</li>
+                                </ul>
+                                
+                                <h3 class="text-xl font-bold mb-2">2.2 Account Ownership</h3>
+                                <p class="mb-4">Accounts may be held individually or jointly. Joint account holders are jointly and severally liable for all account obligations.</p>
+                                
+                                <h3 class="text-xl font-bold mb-2">2.3 Account Maintenance</h3>
+                                <p>You must maintain your account in good standing and promptly update your personal information when changes occur.</p>
+                            </section>
+                            
+                            <!-- Transactions -->
+                            <section id="transactions" class="terms-section mb-12">
+                                <h2 class="text-2xl font-bold mb-4">3. Transactions</h2>
+                                <h3 class="text-xl font-bold mb-2">3.1 Authorization</h3>
+                                <p class="mb-4">You authorize RamzBank to process transactions initiated through your account according to your instructions.</p>
+                                
+                                <h3 class="text-xl font-bold mb-2">3.2 Transaction Limits</h3>
+                                <p class="mb-4">Certain transactions may be subject to limits based on account type, regulatory requirements, or our internal policies.</p>
+                                
+                                <h3 class="text-xl font-bold mb-2">3.3 Processing Times</h3>
+                                <p>Transaction processing times vary depending on the type of transaction and may take 1-3 business days to complete.</p>
+                            </section>
+                            
+                            <!-- Digital Banking -->
+                            <section id="digital-banking" class="terms-section mb-12">
+                                <h2 class="text-2xl font-bold mb-4">4. Digital Banking</h2>
+                                <h3 class="text-xl font-bold mb-2">4.1 Online Access</h3>
+                                <p class="mb-4">Digital banking services are available 24/7, subject to scheduled maintenance and system availability.</p>
+                                
+                                <h3 class="text-xl font-bold mb-2">4.2 Security</h3>
+                                <p class="mb-4">You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account.</p>
+                                
+                                <h3 class="text-xl font-bold mb-2">4.3 Mobile Banking</h3>
+                                <p>Use of our mobile app is subject to additional terms in our Mobile Banking Agreement.</p>
+                            </section>
+                            
+                            <!-- Fees & Charges -->
+                            <section id="fees" class="terms-section mb-12">
+                                <h2 class="text-2xl font-bold mb-4">5. Fees & Charges</h2>
+                                <p class="mb-4">You agree to pay all applicable fees associated with your accounts and services. Current fee schedules are available on our website and at branch locations.</p>
+                                <p>We may change our fees with 30 days' notice as required by law.</p>
+                            </section>
+                            
+                            <!-- Liability -->
+                            <section id="liability" class="terms-section mb-12">
+                                <h2 class="text-2xl font-bold mb-4">6. Liability</h2>
+                                <h3 class="text-xl font-bold mb-2">6.1 Our Liability</h3>
+                                <p class="mb-4">RamzBank shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of our services.</p>
+                                
+                                <h3 class="text-xl font-bold mb-2">6.2 Your Liability</h3>
+                                <p>You are responsible for unauthorized transactions if you fail to maintain security of your account credentials or promptly report unauthorized activity.</p>
+                            </section>
+                            
+                            <!-- Privacy -->
+                            <section id="privacy" class="terms-section mb-12">
+                                <h2 class="text-2xl font-bold mb-4">7. Privacy</h2>
+                                <p class="mb-4">Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your personal information.</p>
+                                <p>By using our services, you consent to our collection and use of your information as described in our Privacy Policy.</p>
+                            </section>
+                            
+                            <!-- Amendments -->
+                            <section id="amendments" class="terms-section mb-12">
+                                <h2 class="text-2xl font-bold mb-4">8. Amendments</h2>
+                                <p class="mb-4">We may modify these Terms at any time. We will provide notice of material changes as required by law.</p>
+                                <p>Your continued use of our services after changes become effective constitutes acceptance of the modified Terms.</p>
+                            </section>
+                            
+                            <!-- Termination -->
+                            <section id="termination" class="terms-section mb-12">
+                                <h2 class="text-2xl font-bold mb-4">9. Termination</h2>
+                                <p class="mb-4">Either party may terminate this agreement at any time, subject to the terms of your account agreements.</p>
+                                <p>Termination does not affect rights and obligations incurred prior to termination.</p>
+                            </section>
+                            
+                            <!-- Governing Law -->
+                            <section id="governing-law" class="terms-section">
+                                <h2 class="text-2xl font-bold mb-4">10. Governing Law</h2>
+                                <p class="mb-4">These Terms shall be governed by and construed in accordance with the laws of the state where RamzBank is headquartered.</p>
+                                <p>Any disputes shall be resolved in the courts of competent jurisdiction in that state.</p>
+                            </section>
+                            
+                            <!-- Acceptance -->
+                            <div class="mt-16 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <h3 class="text-lg font-bold mb-4">Acceptance of Terms</h3>
+                                <p>By using RamzBank's services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">RamzBank</h3>
+                    <p class="mb-4">Innovative banking solutions for the digital age.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accounts.html" class="hover:text-white">Personal Banking</a></li>
+                        <li><a href="accounts.html" class="hover:text-white">Business Banking</a></li>
+                        <li><a href="loans.html" class="hover:text-white">Loans</a></li>
+                        <li><a href="investments.html" class="hover:text-white">Investments</a></li>
+                        <li><a href="credit-cards.html" class="hover:text-white">Credit Cards</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="careers.html" class="hover:text-white">Careers</a></li>
+                        <li><a href="newsroom.html" class="hover:text-white">Newsroom</a></li>
+                        <li><a href="investor-relations.html" class="hover:text-white">Investor Relations</a></li>
+                        <li><a href="corporate-responsibility.html" class="hover:text-white">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="faqs.html" class="hover:text-white">FAQs</a></li>
+                        <li><a href="security-center.html" class="hover:text-white">Security Center</a></li>
+                        <li><a href="branch-locator.html" class="hover:text-white">Branch Locator</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-sm">
+                <p id="footer-copyright">© 2025 RamzBank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+        themeToggle.addEventListener('click', function() {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                }
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Terms Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const termsContainer = document.querySelector('.terms-container');
+            termsContainer.style.animation = 'fadeInUp 0.5s ease-out forwards';
+            
+            // Highlight current section in nav
+            const sections = document.querySelectorAll('.terms-section');
+            const navItems = document.querySelectorAll('.terms-nav li');
+            
+            function updateActiveNav() {
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 150;
+                    if (window.scrollY >= sectionTop) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    const link = item.querySelector('a');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveNav);
+            updateActiveNav(); // Initial call
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('.terms-nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without page jump
+                    history.pushState(null, null, targetId);
+                });
+            });
+        });
+
+        // Dynamic Footer Copyright
+        document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} RamzBank. All rights reserved.`;
+    </script>
+</body>
+</html>

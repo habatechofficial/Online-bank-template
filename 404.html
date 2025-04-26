@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | RamzBank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .error-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/error-bg.jpg');
+            background-size: cover;
+        }
+        .error-code {
+            font-size: 8rem;
+            line-height: 1;
+            background: linear-gradient(to right, #2563eb, #1e40af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        @media (max-width: 640px) {
+            .error-code {
+                font-size: 5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="py-6 px-4 bg-white dark:bg-gray-800 shadow-sm">
+            <div class="container mx-auto flex justify-between items-center">
+                <span class="text-2xl font-bold text-primary dark:text-white">Ramz<span class="text-blue-600 dark:text-blue-400">Bank</span></span>
+                <a href="index.html" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                    <i class="fas fa-home mr-1"></i> Home
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow flex items-center justify-center">
+            <div class="error-hero text-white text-center py-20 w-full">
+                <div class="container mx-auto px-4 max-w-4xl">
+                    <div class="bg-white dark:bg-gray-800 bg-opacity-90 rounded-lg p-8 md:p-12 shadow-xl">
+                        <div class="error-code font-bold mb-4">404</div>
+                        <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">Page Not Found</h1>
+                        <p class="text-xl mb-8 text-gray-600 dark:text-gray-300">
+                            The page you're looking for doesn't exist or has been moved.
+                        </p>
+                        
+                        <div class="max-w-md mx-auto mb-8">
+                            <div class="relative">
+                                <input type="text" placeholder="Search our website..." 
+                                    class="w-full pl-4 pr-10 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <button class="absolute right-3 top-3 text-gray-400 hover:text-blue-500">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                            <a href="accounts.html" class="bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 p-4 rounded-lg transition-colors">
+                                <i class="fas fa-wallet text-blue-500 mb-2"></i>
+                                <p>Accounts</p>
+                            </a>
+                            <a href="cards.html" class="bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 p-4 rounded-lg transition-colors">
+                                <i class="fas fa-credit-card text-blue-500 mb-2"></i>
+                                <p>Cards</p>
+                            </a>
+                            <a href="contact.html" class="bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 p-4 rounded-lg transition-colors">
+                                <i class="fas fa-headset text-blue-500 mb-2"></i>
+                                <p>Support</p>
+                            </a>
+                        </div>
+                        
+                        <a href="index.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium">
+                            <i class="fas fa-arrow-left mr-2"></i> Return to Homepage
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-gray-300 py-8">
+            <div class="container mx-auto px-4 text-center">
+                <p>&copy; 2023 RamzBank. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

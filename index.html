@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RamzBank - Modern Online Banking Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script>
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                colors: {
+                    primary: {
+                        DEFAULT: '#2563eb',
+                        dark: '#1e40af'
+                    },
+                    dark: {
+                        DEFAULT: '#000000',
+                        secondary: '#111827'
+                    },
+                    // New color additions
+                    green: {
+                        50: '#f0fdf4',
+                        100: '#dcfce7',
+                        200: '#bbf7d0',
+                        300: '#86efac',
+                        400: '#4ade80',
+                        500: '#22c55e',
+                        600: '#16a34a',
+                        700: '#15803d',
+                        800: '#166534',
+                        900: '#14532d',
+                    },
+                    red: {
+                        50: '#fef2f2',
+                        100: '#fee2e2',
+                        200: '#fecaca',
+                        300: '#fca5a5',
+                        400: '#f87171',
+                        500: '#ef4444',
+                        600: '#dc2626',
+                        700: '#b91c1c',
+                        800: '#991b1b',
+                        900: '#7f1d1d',
+                    },
+                    yellow: {
+                        50: '#fefce8',
+                        100: '#fef9c3',
+                        200: '#fef08a',
+                        300: '#fde047',
+                        400: '#facc15',
+                        500: '#eab308',
+                        600: '#ca8a04',
+                        700: '#a16207',
+                        800: '#854d0e',
+                        900: '#713f12',
+                    },
+                    purple: {
+                        50: '#faf5ff',
+                        100: '#f3e8ff',
+                        200: '#e9d5ff',
+                        300: '#d8b4fe',
+                        400: '#c084fc',
+                        500: '#a855f7',
+                        600: '#9333ea',
+                        700: '#7e22ce',
+                        800: '#6b21a8',
+                        900: '#581c87',
+                    }
+                }
+            }
+        }
+    }
+</script>
+    <style>
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            width: 50px;
+            height: 50px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-to-top:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .back-to-top {
+            background: #1e40af;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark .back-to-top:hover {
+            background: #2563eb;
+        }
+        
+        .hero-slide {
+            height: 500px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .hero-slide-1 {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/banners/banner-1.jpg');
+        }
+        
+        .hero-slide-2 {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/banners/banner-2.jpg');
+        }
+        
+        .hero-slide-3 {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/banners/banner-3.jpg');
+        }
+        
+        .dark .hero-slide-1 {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/banners/banner-1.jpg');
+        }
+        
+        .dark .hero-slide-2 {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/banners/banner-2.jpg');
+        }
+        
+        .dark .hero-slide-3 {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/banners/banner-3.jpg');
+        }
+        
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+            text-align: center;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .feature-card, .credit-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover, .credit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .feature-card, .dark .credit-card {
+            background: #1f2937;
+        }
+        
+        .dark .feature-card:hover, .dark .credit-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Owl Carousel Navigation */
+        .owl-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            transform: translateY(-50%);
+        }
+        
+        .owl-prev, .owl-next {
+            background: rgba(255, 255, 255, 0.3) !important;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            color: white !important;
+            font-size: 1.5rem !important;
+            transition: all 0.3s ease;
+        }
+        
+        .owl-prev:hover, .owl-next:hover {
+            background: rgba(255, 255, 255, 0.7) !important;
+            color: #2563eb !important;
+        }
+        
+        /* Owl Carousel Dots */
+        .owl-dots {
+            position: absolute;
+            bottom: 1.5rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        
+        .owl-dot span {
+            background: rgba(255, 255, 255, 0.5) !important;
+            width: 12px;
+            height: 12px;
+            margin: 0 !important;
+            transition: all 0.3s ease;
+        }
+        
+        .owl-dot.active span {
+            background: white !important;
+            width: 30px;
+            border-radius: 6px;
+        }
+        
+        /* Spinner Styles (Carousel) */
+        .spinner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 500px;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .dark .spinner-overlay {
+            background: #1e40af;
+        }
+        
+        .spinner-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+            display: none;
+        }
+        
+        .spinner {
+            font-size: 3rem;
+            color: white;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Credit Card Spinner Styles */
+        .credit-card-spinner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .dark .credit-card-spinner-overlay {
+            background: #111827;
+        }
+        
+        .credit-card-spinner-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Ensure carousel is hidden initially */
+        .owl-carousel-hidden {
+            display: none;
+        }
+        
+        .owl-carousel.loaded {
+            opacity: 1;
+            visibility: visible;
+            display: block;
+        }
+        
+        /* Ensure credit cards are hidden initially */
+        .credit-cards-hidden {
+            display: none;
+        }
+        
+        .credit-cards-loaded {
+            opacity: 1;
+            visibility: visible;
+            display: flex;
+        }
+        
+        /* Credit Card Image */
+        .credit-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-slide, .spinner-overlay {
+                height: 400px;
+            }
+            
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .owl-nav {
+                padding: 0 1rem;
+            }
+            
+            .owl-prev, .owl-next {
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.25rem !important;
+            }
+            
+            .spinner {
+                font-size: 2.5rem;
+            }
+            
+            .credit-card img {
+                height: 180px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-slide, .spinner-overlay {
+                height: 350px;
+            }
+            
+            .hero-content h2 {
+                font-size: 1.75rem;
+            }
+            
+            .spinner {
+                font-size: 2rem;
+            }
+            
+            .credit-card img {
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-black dark:text-gray-200 transition-colors duration-300">
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary dark:text-white">Ramz<span class="text-blue-600 dark:text-blue-400">Bank</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Home</a>
+                    <a href="accounts.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Accounts</a>
+                    <a href="loans.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Loans</a>
+                    <a href="investments.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Investments</a>
+                    <a href="about.html" class="font-medium hover:text-primary dark:hover:text-blue-400">About Us</a>
+                    <a href="contact.html" class="font-medium hover:text-primary dark:hover:text-blue-400">Contact</a>
+                    
+                </div>
+                
+                <!-- Right Side Items -->
+                <div class="flex items-center space-x-4">
+                    <!-- Dark/Light Mode Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-icon" class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                    
+                    
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-bars text-gray-700 dark:text-gray-200"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu (Hidden by default) -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="index.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Home</a>
+                <a href="accounts.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Accounts</a>
+                <a href="loans.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Loans</a>
+                <a href="investments.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Investments</a>
+                <a href="about.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">About Us</a>
+                <a href="contact.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Contact</a>
+                <a href="credit-cards.html" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">Credit Cards</a>
+                <a href="login.html" class="block mt-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md font-medium text-center transition-colors">
+                    Online Banking Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Carousel with Spinner -->
+    <div class="relative">
+        <!-- Spinner Overlay -->
+        <div id="spinner-overlay" class="spinner-overlay">
+            <i class="fas fa-spinner spinner"></i>
+        </div>
+        <!-- Owl Carousel -->
+        <div class="owl-carousel owl-theme owl-carousel-hidden">
+            <!-- Slide 1 -->
+            <div class="hero-slide hero-slide-1">
+                <div class="hero-content">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 animate__animated animate__fadeInDown">Smart Banking for Modern Life</h2>
+                    <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s">Experience seamless digital banking with our award-winning platform.</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="accounts.html" class="bg-green-500 text-white hover:bg-gray-100 px-6 py-3 rounded-md font-bold text-center transition-colors animate__animated animate__fadeInUp animate__delay-2s">
+                            Open an Account
+                        </a>
+                        <a href="about.html" class="border-2 border-white hover:bg-white hover:text-primary px-6 py-3 rounded-md font-bold text-center transition-colors animate__animated animate__fadeInUp animate__delay-2s">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="hero-slide hero-slide-2">
+                <div class="hero-content">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 animate__animated animate__fadeInDown">Your Financial Security Matters</h2>
+                    <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s">Advanced protection for your money with 24/7 monitoring.</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="security-center.html" class="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-md font-bold text-center transition-colors animate__animated animate__fadeInUp animate__delay-2s">
+                            Security Features
+                        </a>
+                        <a href="contact.html" class="border-2 border-white hover:bg-white hover:text-primary px-6 py-3 rounded-md font-bold text-center transition-colors animate__animated animate__fadeInUp animate__delay-2s">
+                            Get Protected
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="hero-slide hero-slide-3">
+                <div class="hero-content">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 animate__animated animate__fadeInDown">Grow Your Wealth with Us</h2>
+                    <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s">Investment solutions tailored to your financial goals.</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="investments.html" class="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-md font-bold text-center transition-colors animate__animated animate__fadeInUp animate__delay-2s">
+                            Explore Investments
+                        </a>
+                        <a href="contact.html" class="border-2 border-white hover:bg-white hover:text-primary px-6 py-3 rounded-md font-bold text-center transition-colors animate__animated animate__fadeInUp animate__delay-2s">
+                            Talk to an Advisor
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credit Cards Section -->
+    <section class="py-16 bg-white dark:bg-gray-900 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Choose the Card That Suits You</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Discover our range of credit cards designed to match your lifestyle and financial needs.</p>
+            </div>
+            
+            <!-- Credit Card Spinner Overlay -->
+            <div id="credit-card-spinner-overlay" class="credit-card-spinner-overlay">
+                <div role="status">
+                    <svg aria-hidden="true" class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                    </svg>
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            
+            <div id="credit-cards-container" class="flex flex-col md:flex-row gap-8 credit-cards-hidden">
+                <!-- Card 1: Platinum -->
+                <div class="credit-card bg-white dark:bg-gray-800 rounded-lg shadow-md transition-all duration-300 flex-1">
+                    <img src="assets/images/cards/platinum-card.jpg" alt="Platinum Credit Card" class="animate__animated animate__fadeInRight">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Platinum Card</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Premium rewards, travel benefits, and exclusive perks for high spenders.</p>
+                        <a href="credit-card-platinum.html" class="text-primary dark:text-blue-400 font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Card 2: Gold -->
+                <div class="credit-card bg-white dark:bg-gray-800 rounded-lg shadow-md transition-all duration-300 flex-1">
+                    <img src="assets/images/cards/gold-card.jpg" alt="Gold Credit Card" class="animate__animated animate__fadeInRight animate__delay-1s">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Gold Card</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Great cashback offers and flexible payment options for everyday use.</p>
+                        <a href="credit-card-gold.html" class="text-primary dark:text-blue-400 font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Card 3: Classic -->
+                <div class="credit-card bg-white dark:bg-gray-800 rounded-lg shadow-md transition-all duration-300 flex-1">
+                    <img src="assets/images/cards/classic-card.jpg" alt="Classic Credit Card" class="animate__animated animate__fadeInRight animate__delay-2s">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Classic Card</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Simple, low-fee card perfect for building credit or basic purchases.</p>
+                        <a href="credit-card-classic.html" class="text-primary dark:text-blue-400 font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Why Choose RamzBank?</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">We're redefining banking with innovative features designed to make your financial life easier.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="text-blue-500 dark:text-blue-400 mb-4">
+                        <i class="fas fa-shield-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Advanced Security</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Military-grade encryption and biometric authentication to keep your money and data safe.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="text-blue-500 dark:text-blue-400 mb-4">
+                        <i class="fas fa-mobile-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Mobile Banking</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Full-featured banking app that lets you manage your finances anywhere, anytime.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="text-blue-500 dark:text-blue-400 mb-4">
+                        <i class="fas fa-percentage text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Competitive Rates</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Higher interest rates on savings and lower fees than traditional banks.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="text-blue-500 dark:text-blue-400 mb-4">
+                        <i class="fas fa-hand-holding-usd text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">24/7 Support</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Real humans ready to help you anytime with your banking needs.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="text-blue-500 dark:text-blue-400 mb-4">
+                        <i class="fas fa-chart-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Insights</h3>
+                    <p class="text-gray-600 dark:text-gray-400">AI-powered financial analysis to help you make better money decisions.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="text-blue-500 dark:text-blue-400 mb-4">
+                        <i class="fas fa-bolt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Instant Transfers</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Send and receive money instantly, even to other banks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary dark:bg-gray-800 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to experience better banking?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of customers who trust RamzBank with their financial needs.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="accounts.html" class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-md font-bold transition-colors">
+                    Open an Account
+                </a>
+                <a href="contact.html" class="border-2 border-white hover:bg-white hover:text-primary px-8 py-3 rounded-md font-bold transition-colors">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">RamzBank</h3>
+                    <p class="mb-4">Innovative banking solutions for the digital age.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accounts.html" class="hover:text-white">Personal Banking</a></li>
+                        <li><a href="accounts.html" class="hover:text-white">Business Banking</a></li>
+                        <li><a href="loans.html" class="hover:text-white">Loans</a></li>
+                        <li><a href="investments.html" class="hover:text-white">Investments</a></li>
+                        <li><a href="credit-cards.html" class="hover:text-white">Credit Cards</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="careers.html" class="hover:text-white">Careers</a></li>
+                        <li><a href="newsroom.html" class="hover:text-white">Newsroom</a></li>
+                        <li><a href="investor-relations.html" class="hover:text-white">Investor Relations</a></li>
+                        <li><a href="corporate-responsibility.html" class="hover:text-white">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="faqs.html" class="hover:text-white">FAQs</a></li>
+                        <li><a href="security-center.html" class="hover:text-white">Security Center</a></li>
+                        <li><a href="branch-locator.html" class="hover:text-white">Branch Locator</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p id="footer-copyright">© 2025 RamzBank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top bg-primary hover:bg-primary-dark text-white p-3 rounded-full shadow-lg">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- jQuery and Owl Carousel JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuButton.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // Function to update carousel for dark/light mode
+        const updateCarouselMode = (isDark) => {
+            const opacity = isDark ? '0.8' : '0.6';
+            $('.hero-slide-1, .hero-slide-2, .hero-slide-3').css('background-image', function() {
+                const current = $(this).css('background-image');
+                return current.replace(/rgba\(0, 0, 0, [0-9.]+\)/g, `rgba(0, 0, 0, ${opacity})`);
+            });
+        };
+        
+        // Check for saved user preference or use system preference
+        if (localStorage.getItem('color-theme') === 'dark' || 
+            (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+            $(() => updateCarouselMode(true));
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            themeIcon.classList.toggle('fa-moon');
+            themeIcon.classList.toggle('fa-sun');
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                updateCarouselMode(false);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                updateCarouselMode(true);
+            }
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Initialize Owl Carousel and Credit Card Spinner Logic
+        $(document).ready(function(){
+            console.log('Document ready, initializing spinners and carousel');
+            
+            // --- Owl Carousel Initialization ---
+            // Ensure carousel is hidden initially
+            $('.owl-carousel').addClass('owl-carousel-hidden');
+            
+            // Initialize Owl Carousel
+            try {
+                const owl = $(".owl-carousel").owlCarousel({
+                    items: 1,
+                    loop: true,
+                    autoplay: true,
+                    autoplayTimeout: 8000,
+                    autoplayHoverPause: true,
+                    nav: false,
+                    dots: false,
+                    animateOut: 'fadeOut',
+                    animateIn: 'fadeIn',
+                    smartSpeed: 1500,
+                    startPosition: 0
+                });
+                console.log('Owl Carousel initialized successfully');
+                
+                // Handle carousel spinner logic (6 seconds)
+                if (!sessionStorage.getItem('spinnerShown')) {
+                    console.log('Showing carousel spinner for 6 seconds');
+                    setTimeout(function() {
+                        console.log('Hiding carousel spinner, showing carousel');
+                        $('#spinner-overlay').addClass('hidden');
+                        $('.owl-carousel').removeClass('owl-carousel-hidden').addClass('loaded');
+                        owl.trigger('refresh.owl.carousel');
+                        sessionStorage.setItem('spinnerShown', 'true');
+                    }, 6000);
+                } else {
+                    console.log('Carousel spinner already shown, displaying carousel immediately');
+                    $('#spinner-overlay').addClass('hidden');
+                    $('.owl-carousel').removeClass('owl-carousel-hidden').addClass('loaded');
+                    owl.trigger('refresh.owl.carousel');
+                }
+                
+                // Reinitialize animations when slide changes
+                owl.on('changed.owl.carousel', function(event) {
+                    console.log('Carousel slide changed to index: ' + event.item.index);
+                    $('.hero-content h2').removeClass('animate__animated animate__fadeInDown');
+                    $('.hero-content p').removeClass('animate__animated animate__fadeIn');
+                    $('.hero-content a').removeClass('animate__animated animate__fadeInUp');
+                    
+                    setTimeout(function() {
+                        $('.hero-content h2').addClass('animate__animated animate__fadeInDown');
+                        $('.hero-content p').addClass('animate__animated animate__fadeIn');
+                        $('.hero-content a').addClass('animate__animated animate__fadeInUp');
+                    }, 50);
+                });
+                
+                // Verify carousel initialization
+                if (!$('.owl-carousel').hasClass('owl-loaded')) {
+                    console.error('Owl Carousel failed to initialize properly');
+                }
+            } catch (error) {
+                console.error('Error initializing Owl Carousel: ', error);
+            }
+            
+            // --- Credit Card Spinner Logic ---
+            try {
+                // Ensure credit cards are hidden initially
+                $('#credit-cards-container').addClass('credit-cards-hidden');
+                
+                // Handle credit card spinner logic (5 seconds)
+                if (!sessionStorage.getItem('creditCardSpinnerShown')) {
+                    console.log('Showing credit card spinner for 5 seconds');
+                    setTimeout(function() {
+                        console.log('Hiding credit card spinner, showing credit cards');
+                        $('#credit-card-spinner-overlay').addClass('hidden');
+                        $('#credit-cards-container').removeClass('credit-cards-hidden').addClass('credit-cards-loaded');
+                        sessionStorage.setItem('creditCardSpinnerShown', 'true');
+                    }, 5000);
+                } else {
+                    console.log('Credit card spinner already shown, displaying credit cards immediately');
+                    $('#credit-card-spinner-overlay').addClass('hidden');
+                    $('#credit-cards-container').removeClass('credit-cards-hidden').addClass('credit-cards-loaded');
+                }
+            } catch (error) {
+                console.error('Error initializing credit card spinner: ', error);
+            }
+            
+            // Initialize carousel mode based on current theme
+            updateCarouselMode(document.documentElement.classList.contains('dark'));
+        });
+
+        // Dynamic Footer Copyright
+        document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} RamzBank. All rights reserved.`;
+    </script>
+</body>
+</html>

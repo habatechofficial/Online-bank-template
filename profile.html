@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | RamzBank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        dark: {
+                            DEFAULT: '#000000',
+                            secondary: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Reuse your existing styles */
+        .sidebar-link {
+            transition: all 0.2s ease;
+        }
+        .sidebar-link:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .sidebar-link.active {
+            background-color: rgba(59, 130, 246, 0.2);
+            border-left: 3px solid #2563eb;
+        }
+        .profile-card {
+            transition: all 0.3s ease;
+        }
+        .profile-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .dark .profile-card {
+            background: #1f2937;
+        }
+    </style>
+    <style>
+        /* All previous styles remain unchanged */
+        .hamburger-line {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .hamburger-active > span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger-active > span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        .hamburger-active > span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -8px);
+        }
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        .sidebar-collapsed {
+            width: 5rem;
+        }
+        .sidebar-expanded {
+            width: 16rem;
+        }
+        .main-content {
+            transition: margin-left 0.3s ease;
+        }
+        .sidebar-link {
+            transition: all 0.2s ease;
+        }
+        .sidebar-link:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .sidebar-link.active {
+            background-color: rgba(59, 130, 246, 0.2);
+            border-left: 3px solid #2563eb;
+        }
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .has-tooltip:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .account-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid #2563eb;
+        }
+        .account-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .dark .account-card {
+            background: #1f2937;
+            border-left-color: #1e40af;
+        }
+        .quick-action-btn {
+            transition: all 0.2s ease;
+        }
+        .quick-action-btn:hover {
+            transform: scale(1.05);
+        }
+        .transaction-row:hover {
+            background: rgba(37, 99, 235, 0.05);
+        }
+        .dark .transaction-row:hover {
+            background: rgba(30, 64, 175, 0.1);
+        }
+        .chart-container {
+            height: 250px;
+        }
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            width: 50px;
+            height: 50px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .back-to-top:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .dark .back-to-top {
+            background: #1e40af;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .dark .back-to-top:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen font-sans transition-colors duration-300">
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar sidebar-expanded fixed top-0 left-0 h-screen bg-white dark:bg-gray-800 shadow-md z-40 overflow-hidden">
+        <div class="flex flex-col h-full">
+            <!-- Sidebar Header -->
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center">
+                    <i class="fas fa-piggy-bank text-2xl text-blue-600 dark:text-blue-400 mr-2"></i>
+                    <span class="text-lg font-bold text-gray-800 dark:text-gray-200 whitespace-nowrap">RamzBank</span>
+                </div>
+                <button id="sidebar-close-btn" class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <i class="fas fa-chevron-left text-gray-600 dark:text-gray-300"></i>
+                </button>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <div class="flex-1 overflow-y-auto py-4">
+                <div class="space-y-1 px-2">
+                    <a href="dashboard.html" class="sidebar-link active flex items-center px-4 py-3 text-sm font-medium rounded-r-md">
+                        <i class="fas fa-tachometer-alt mr-3 text-gray-600 dark:text-gray-300"></i>
+                        <span class="whitespace-nowrap">Dashboard</span>
+                    </a>
+                    <a href="accounts.html" class="sidebar-link flex items-center px-4 py-3 text-sm font-medium rounded-r-md">
+                        <i class="fas fa-wallet mr-3 text-gray-600 dark:text-gray-300"></i>
+                        <span class="whitespace-nowrap">Accounts</span>
+                    </a>
+                    <a href="transfers.html" class="sidebar-link flex items-center px-4 py-3 text-sm font-medium rounded-r-md">
+                        <i class="fas fa-exchange-alt mr-3 text-gray-600 dark:text-gray-300"></i>
+                        <span class="whitespace-nowrap">Transfers</span>
+                    </a>
+                    <a href="payments.html" class="sidebar-link flex items-center px-4 py-3 text-sm font-medium rounded-r-md">
+                        <i class="fas fa-money-bill-wave mr-3 text-gray-600 dark:text-gray-300"></i>
+                        <span class="whitespace-nowrap">Payments</span>
+                    </a>
+                    <a href="cards.html" class="sidebar-link flex items-center px-4 py-3 text-sm font-medium rounded-r-md">
+                        <i class="far fa-credit-card mr-3 text-gray-600 dark:text-gray-300"></i>
+                        <span class="whitespace-nowrap">Cards</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex items-center">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="w-8 h-8 rounded-full object-cover">
+                    <div class="ml-3 overflow-hidden">
+                        <p class="text-sm font-medium truncate text-gray-800 dark:text-gray-200">John Doe</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 truncate">Premium Member</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collapsed Sidebar -->
+    <div id="collapsed-sidebar" class="sidebar sidebar-collapsed fixed top-0 left-0 h-screen bg-white dark:bg-gray-800 shadow-md z-40 hidden">
+        <div class="flex flex-col h-full">
+            <!-- Sidebar Header -->
+            <div class="flex items-center justify-center p-4 border-b border-gray-200 dark:border-gray-700">
+                <i class="fas fa-piggy-bank text-2xl text-blue-600 dark:text-blue-400"></i>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <div class="flex-1 overflow-y-auto py-4">
+                <div class="space-y-4 flex flex-col items-center">
+                    <a href="dashboard.html" class="has-tooltip relative w-full flex justify-center py-3">
+                        <i class="fas fa-tachometer-alt text-gray-600 dark:text-gray-300"></i>
+                        <span class="tooltip absolute left-full ml-2 px-2 py-1 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs rounded whitespace-nowrap">Dashboard</span>
+                    </a>
+                    <a href="accounts.html" class="has-tooltip relative w-full flex justify-center py-3">
+                        <i class="fas fa-wallet text-gray-600 dark:text-gray-300"></i>
+                        <span class="tooltip absolute left-full ml-2 px-2 py-1 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs rounded whitespace-nowrap">Accounts</span>
+                    </a>
+                    <a href="transfers.html" class="has-tooltip relative w-full flex justify-center py-3">
+                        <i class="fas fa-exchange-alt text-gray-600 dark:text-gray-300"></i>
+                        <span class="tooltip absolute left-full ml-2 px-2 py-1 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs rounded whitespace-nowrap">Transfers</span>
+                    </a>
+                    <a href="payments.html" class="has-tooltip relative w-full flex justify-center py-3">
+                        <i class="fas fa-money-bill-wave text-gray-600 dark:text-gray-300"></i>
+                        <span class="tooltip absolute left-full ml-2 px-2 py-1 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs rounded whitespace-nowrap">Payments</span>
+                    </a>
+                    <a href="cards.html" class="has-tooltip relative w-full flex justify-center py-3">
+                        <i class="far fa-credit-card text-gray-600 dark:text-gray-300"></i>
+                        <span class="tooltip absolute left-full ml-2 px-2 py-1 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs rounded whitespace-nowrap">Cards</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex justify-center">
+                <div class="has-tooltip relative">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="w-8 h-8 rounded-full object-cover">
+                    <span class="tooltip absolute left-full ml-2 px-2 py-1 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs rounded whitespace-nowrap">John Doe<br>Premium Member</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content ml-16 md:ml-64 transition-all duration-300">
+        <!-- Navbar -->
+        <nav class="sticky top-0 z-30 bg-white dark:bg-gray-800 shadow-md transition-colors duration-300">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <!-- Left Side -->
+                    <div class="flex items-center space-x-4">
+                        <button id="sidebar-toggle-btn" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-bars text-gray-600 dark:text-gray-300"></i>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800 dark:text-gray-200">Dashboard</h1>
+                    </div>
+
+                    <!-- Right Side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Dark/Light Mode Toggle -->
+                        <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                            <i id="theme-icon" class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                        </button>
+                        
+                        <div class="hidden md:flex items-center">
+                            <div class="relative">
+                                <input type="text" placeholder="Search..." class="bg-gray-100 dark:bg-gray-700 border-0 rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+                                <i class="fas fa-search absolute left-3 top-2.5 text-gray-500 dark:text-gray-400"></i>
+                            </div>
+                        </div>
+
+                        <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative">
+                            <i class="fas fa-bell text-gray-600 dark:text-gray-300"></i>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+
+                        <div class="relative">
+                            <button id="user-menu-btn" class="flex items-center space-x-2 focus:outline-none">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="w-8 h-8 rounded-full object-cover">
+                                <span class="hidden md:inline font-medium text-gray-800 dark:text-gray-200">John Doe</span>
+                                <i class="fas fa-chevron-down text-xs hidden md:inline text-gray-600 dark:text-gray-300"></i>
+                            </button>
+                            
+                            <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-700 rounded-md shadow-lg py-1 z-50">
+                                <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-600">
+                                    <p class="text-sm font-medium text-gray-800 dark:text-gray-200">John Doe</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Premium Member</p>
+                                </div>
+                                <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">Profile</a>
+                                <a href="settings.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">Settings</a>
+                                <a href="login.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">Sign out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Profile Content -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Profile Card -->
+                <div class="lg:col-span-1">
+                    <div class="profile-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <div class="flex flex-col items-center">
+                            <div class="relative mb-4">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="w-32 h-32 rounded-full object-cover border-4 border-blue-500">
+                                <button class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                            <h2 class="text-xl font-bold">R. Banker</h2>
+                            <p class="text-gray-500 dark:text-gray-400">Premium Member</p>
+                            <div class="mt-4 flex space-x-2">
+                                <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-xs">Verified</span>
+                                <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-xs">Active</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 space-y-4">
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Member Since</p>
+                                <p class="font-medium">January 2022</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Last Login</p>
+                                <p class="font-medium">Today, 09:42 AM</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Login Location</p>
+                                <p class="font-medium">New York, USA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Details -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-bold mb-6">Personal Information</h2>
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">First Name</label>
+                                    <input type="text" value="Ramz" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Last Name</label>
+                                    <input type="text" value="Banker" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                                <input type="email" value="r.banker@example.com" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
+                                    <input type="tel" value="+1 (555) 123-4567" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date of Birth</label>
+                                    <input type="text" value="January 15, 1985" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700" rows="3">123 Banking St, New York, NY 10001</textarea>
+                            </div>
+                            <div class="flex justify-end space-x-4 pt-4">
+                                <button type="button" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">Cancel</button>
+                                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // DOM Elements
+        const html = document.documentElement;
+        const sidebar = document.getElementById('sidebar');
+        const collapsedSidebar = document.getElementById('collapsed-sidebar');
+        const mainContent = document.getElementById('main-content');
+        const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+        const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+        const userMenuBtn = document.getElementById('user-menu-btn');
+        const userDropdown = document.getElementById('user-dropdown');
+        const backToTopBtn = document.getElementById('back-to-top');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Theme Toggle Functionality
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('darkMode', html.classList.contains('dark'));
+            updateThemeIcon();
+        });
+
+        function updateThemeIcon() {
+            const isDark = html.classList.contains('dark');
+            themeIcon.classList.toggle('fa-moon', !isDark);
+            themeIcon.classList.toggle('fa-sun', isDark);
+        }
+
+        // Check for saved theme preference
+        if (localStorage.getItem('darkMode') === 'true' || 
+           (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            updateThemeIcon();
+        }
+
+        // Toggle sidebar
+        sidebarToggleBtn?.addEventListener('click', toggleSidebar);
+
+        // Close sidebar (only visible on mobile)
+        sidebarCloseBtn?.addEventListener('click', collapseSidebar);
+
+        // Toggle user dropdown
+        userMenuBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown?.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Back to top button
+        window.addEventListener('scroll', () => {
+            backToTopBtn.style.display = window.pageYOffset > 300 ? 'flex' : 'none';
+        });
+
+        backToTopBtn?.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('hidden');
+            collapsedSidebar.classList.toggle('hidden');
+            if (sidebar.classList.contains('hidden')) {
+                mainContent.classList.remove('ml-64');
+                mainContent.classList.add('md:ml-16');
+            } else {
+                mainContent.classList.remove('md:ml-16');
+                mainContent.classList.add('ml-64');
+            }
+            localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('hidden'));
+        }
+
+        function collapseSidebar() {
+            sidebar.classList.add('hidden');
+            collapsedSidebar.classList.remove('hidden');
+            mainContent.classList.remove('ml-64');
+            mainContent.classList.add('md:ml-16');
+            localStorage.setItem('sidebarCollapsed', true);
+        }
+
+        function expandSidebar() {
+            sidebar.classList.remove('hidden');
+            collapsedSidebar.classList.add('hidden');
+            mainContent.classList.remove('md:ml-16');
+            mainContent.classList.add('ml-64');
+            localStorage.setItem('sidebarCollapsed', false);
+        }
+
+        function handleResponsive() {
+            if (window.innerWidth < 768) {
+                collapseSidebar();
+            } else {
+                const sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+                sidebarCollapsed ? collapseSidebar() : expandSidebar();
+            }
+        }
+
+        handleResponsive();
+        window.addEventListener('resize', handleResponsive);
+
+        // Update current date
+        const currentDateElement = document.createElement('span');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        currentDateElement.textContent = new Date().toLocaleDateString('en-US', options);
+        document.querySelector('.hero-content p')?.appendChild(currentDateElement);
+
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('[data-tab]');
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                button.classList.add('active');
+                button.classList.remove('text-gray-500', 'dark:text-gray-400');
+                const tabId = button.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId)?.classList.add('active');
+            });
+        });
+
+        // Password visibility toggle
+        const toggleButtons = document.querySelectorAll('.toggle-password');
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const passwordInput = document.getElementById(targetId);
+                const icon = this.querySelector('i');
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        });
+    });
+
+    // Notification handling (example function)
+    function showNotification(message, type = 'info') {
+        console.log(`Notification [${type}]: ${message}`);
+    }
+
+    // Example API call simulation
+    async function fetchAccountData() {
+        try {
+            const mockData = {
+                balance: 12500.42,
+                transactions: [
+                    { id: 1, date: '2023-05-15', description: 'Grocery Store', amount: -125.75 },
+                    { id: 2, date: '2023-05-14', description: 'Salary Deposit', amount: 3500.00 },
+                    { id: 3, date: '2023-05-10', description: 'Utility Bill', amount: -85.30 }
+                ]
+            };
+            return mockData;
+        } catch (error) {
+            showNotification('Failed to load account data', 'error');
+            console.error('Error fetching account data:', error);
+            return null;
+        }
+    }
+
+    async function initDashboard() {
+        const accountData = await fetchAccountData();
+        if (accountData) {
+            console.log('Account data loaded:', accountData);
+        }
+    }
+
+    initDashboard();
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduled Maintenance | RamzBank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .maintenance-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/maintenance-bg.jpg');
+            background-size: cover;
+        }
+        .progress-bar {
+            height: 6px;
+            background-color: #e5e7eb;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 65%;
+            background-color: #2563eb;
+            animation: progress 2s ease-in-out infinite;
+        }
+        @keyframes progress {
+            0% { width: 65%; }
+            50% { width: 68%; }
+            100% { width: 65%; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="py-6 px-4 bg-white dark:bg-gray-800 shadow-sm">
+            <div class="container mx-auto flex justify-between items-center">
+                <span class="text-2xl font-bold text-primary dark:text-white">Ramz<span class="text-blue-600 dark:text-blue-400">Bank</span></span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow flex items-center justify-center">
+            <div class="maintenance-hero text-white text-center py-20 w-full">
+                <div class="container mx-auto px-4 max-w-4xl">
+                    <div class="bg-white dark:bg-gray-800 bg-opacity-90 rounded-lg p-8 md:p-12 shadow-xl">
+                        <i class="fas fa-tools text-5xl text-blue-500 mb-6"></i>
+                        <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">Scheduled Maintenance</h1>
+                        <p class="text-xl mb-6 text-gray-600 dark:text-gray-300">
+                            We're currently performing scheduled maintenance to improve your banking experience.
+                            Services will be back online shortly.
+                        </p>
+                        
+                        <div class="mb-8">
+                            <div class="flex justify-between mb-2 text-sm text-gray-600 dark:text-gray-400">
+                                <span>Estimated completion:</span>
+                                <span>June 15, 2023 - 02:00 UTC</span>
+                            </div>
+                            <div class="progress-bar rounded-full overflow-hidden">
+                                <div class="progress-fill"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                            <h3 class="font-medium mb-2 text-blue-800 dark:text-blue-300">
+                                <i class="fas fa-info-circle mr-2"></i> Maintenance Details
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Upgrading our security systems to provide enhanced protection for your accounts.
+                                Expected downtime: 2 hours.
+                            </p>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium">
+                                <i class="fas fa-sync-alt mr-2"></i> Refresh Page
+                            </a>
+                            <a href="contact.html" class="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-md font-medium dark:text-blue-400 dark:border-blue-400 dark:hover:bg-gray-700">
+                                <i class="fas fa-headset mr-2"></i> Contact Support
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-gray-300 py-8">
+            <div class="container mx-auto px-4 text-center">
+                <p>&copy; 2023 RamzBank. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
